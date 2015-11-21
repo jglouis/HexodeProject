@@ -2,6 +2,7 @@
 
 #include "Hexode.h"
 #include "HexBoard.h"
+#include <math.h>
 
 
 // Sets default values
@@ -40,4 +41,12 @@ void AHexBoard::BeginPlay()
 	}
 
 	
+}
+
+FTransform AHexBoard::GetWorldLocationFromHexagonalCoordinates(uint8 TileSize, int32 U, int32 V) const
+{
+	float X = TileSize * sqrt(3) * (U + V / 2.0f);
+	float Y = TileSize * 1.5f * V;
+
+	return FTransform(FVector(X,Y,0.0f));
 }

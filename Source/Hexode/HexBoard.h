@@ -17,7 +17,17 @@ public:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	// Get the World location from hexagonal coordinates
+	UFUNCTION(BlueprintPure, Category = "Board")
+	FTransform GetWorldLocationFromHexagonalCoordinates(uint8 TileSize, int32 U, int32 V) const;
+
+protected:
+	// The Radius from center
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Board")
+	uint8 Radius;
+
 private:
+	// The Instanced static mesh that represents the hexagonal board
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Board", Meta = (AllowPrivateAccess = "true"))
 	class UInstancedStaticMeshComponent* BoardMesh;
 

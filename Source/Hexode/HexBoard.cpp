@@ -50,3 +50,10 @@ FTransform AHexBoard::GetWorldLocationFromHexagonalCoordinates(uint8 TileSize, i
 
 	return FTransform(FVector(X,Y,0.0f));
 }
+
+int32 AHexBoard::Distance(int32 U1, int32 V1, int32 U2, int32 V2)
+{
+	return (abs(U1 - U2)
+		+ abs(U1 + V1 - U2 - V2)
+		+ abs(V1 - V2)) / 2;
+}

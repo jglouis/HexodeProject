@@ -21,6 +21,10 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Board")
 	FTransform GetWorldLocationFromHexagonalCoordinates(uint8 TileSize, int32 U, int32 V) const;
 
+	// Get the distance between to hexagonal coordinates
+	UFUNCTION(BlueprintPure, Category = "Board")
+	int32 Distance(int32 U1, int32 V1, int32 U2, int32 V2);
+
 protected:
 	// The Radius from center
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Board")

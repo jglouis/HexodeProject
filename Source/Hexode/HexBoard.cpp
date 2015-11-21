@@ -21,39 +21,29 @@ AHexBoard::AHexBoard()
 void AHexBoard::BeginPlay()
 {
 	Super::BeginPlay();
-
-	UE_LOG(LogTemp, Warning, TEXT("Getting the world"));
-
-	UWorld* const World = GetWorld();
-	if (World) {
-		UE_LOG(LogTemp, Warning, TEXT("We have the world"));
-		// Get the actor transform
-		FTransform const transform = this->GetTransform();
-
-		UE_LOG(LogTemp, Warning, TEXT("Board's Location is %s"),
-			*transform.GetLocation().ToString());
-
-		FTransform const transform2 = FTransform(FVector(10.0f, 10.0f, 10.0f));
-
-		// Spawn a tile
-		BoardMesh->AddInstance(transform);
-		BoardMesh->AddInstance(transform2);
-	}
-
 	
 }
 
-FTransform AHexBoard::GetWorldLocationFromHexagonalCoordinates(uint8 TileSize, int32 U, int32 V) const
+FTransform AHexBoard::GetWorldLocationFromHexagonalCoordinates(int32 U, int32 V) const
 {
-	float X = TileSize * sqrt(3) * (U + V / 2.0f);
-	float Y = TileSize * 1.5f * V;
+	float X = this->TileSize * sqrt(3) * (U + V / 2.0f);
+	float Y = this->TileSize * 1.5f * V;
 
 	return FTransform(FVector(X,Y,0.0f));
 }
 
-int32 AHexBoard::Distance(int32 U1, int32 V1, int32 U2, int32 V2)
+int32 AHexBoard::Distance(int32 U1, int32 V1, int32 U2, int32 V2) const
 {
 	return (abs(U1 - U2)
 		+ abs(U1 + V1 - U2 - V2)
 		+ abs(V1 - V2)) / 2;
+}
+
+void AHexBoard::DisplayTile(int32 U, int32 V)
+{
+	// Get the transform location
+	FTransform transform = this->GetWorldLocationFromHexagonalCoordinates(U, V);
+	
+	// Spawn the instance
+	BoardMesh->AddInstance(transform);
 }

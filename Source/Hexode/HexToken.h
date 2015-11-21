@@ -24,6 +24,10 @@ public:
 		HexCoord.Add(V);
 		return HexCoord; }
 
+	// Set Hexagonal coordinates
+	UFUNCTION(BlueprintCallable, Category = "Token")
+	void SetUV(int32 U, int32 V);
+
 private:
 	int32 U;
 	int32 V;

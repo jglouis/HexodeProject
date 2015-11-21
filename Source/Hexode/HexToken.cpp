@@ -19,3 +19,9 @@ void AHexToken::BeginPlay()
 	
 }
 
+void AHexToken::SetUV(int32 U, int32 V)
+{
+	this->U = U;
+	this->V = V;
+}
+

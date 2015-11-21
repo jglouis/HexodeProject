@@ -41,10 +41,16 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Board")
 	uint8 TileSize;
 
+	UFUNCTION(BlueprintPure, Category = "Board")
+	TArray<class AHexToken*> GetTokens() const;
+
 private:
 	// The Instanced static mesh that represents the hexagonal board
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Board", Meta = (AllowPrivateAccess = "true"))
 	class UInstancedStaticMeshComponent* BoardMesh;
+
+	// An array of all the tokens on the board
+	TArray<class AHexToken*> Tokens;
 
 	
 };

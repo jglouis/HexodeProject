@@ -47,3 +47,8 @@ void AHexBoard::DisplayTile(int32 U, int32 V)
 	// Spawn the instance
 	BoardMesh->AddInstance(transform);
 }
+
+TArray<class AHexToken*> AHexBoard::GetTokens() const
+{
+	return TArray<class AHexToken*>();
+}

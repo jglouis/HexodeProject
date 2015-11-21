@@ -29,8 +29,12 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Board")
 	void DisplayTile(int32 U, int32 V);
 
-	// Get all the tile coordinates in a given radius
-	// UFUNCTION(BlueprintPure, Category = "Board")
+	// Add a Token on the board and position it to the apropriate transform location
+	UFUNCTION(BlueprintCallable, Category = "Board")
+	void AddToken(class AHexToken* Token);
+
+	UFUNCTION(BlueprintPure, Category = "Board")
+	TArray<class AHexToken*> GetTokens() const;
 
 protected:
 	// The Radius from center
@@ -40,9 +44,6 @@ protected:
 	// The Radius from center
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Board")
 	uint8 TileSize;
-
-	UFUNCTION(BlueprintPure, Category = "Board")
-	TArray<class AHexToken*> GetTokens() const;
 
 private:
 	// The Instanced static mesh that represents the hexagonal board

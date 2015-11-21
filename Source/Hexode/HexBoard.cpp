@@ -3,6 +3,7 @@
 #include "Hexode.h"
 #include "HexBoard.h"
 #include <math.h>
+#include "HexToken.h"
 
 
 // Sets default values
@@ -46,6 +47,19 @@ void AHexBoard::DisplayTile(int32 U, int32 V)
 	
 	// Spawn the instance
 	BoardMesh->AddInstance(transform);
+}
+
+void AHexBoard::AddToken(AHexToken* Token)
+{
+	// Adding the token to the array
+	this->Tokens.Add(Token);
+
+	// Place the token on the appropriate coordinates
+	TArray<int32> HexCoord = Token->GetUV();
+	int32 U = HexCoord[0];
+	int32 V = HexCoord[1];
+	FTransform transform = this->GetWorldLocationFromHexagonalCoordinates(U, V);
+	Token->SetActorTransform(transform);
 }
 
 TArray<class AHexToken*> AHexBoard::GetTokens() const

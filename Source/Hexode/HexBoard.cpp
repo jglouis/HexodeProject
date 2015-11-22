@@ -63,10 +63,13 @@ void AHexBoard::AddToken(AHexToken* Token)
 }
 
 void AHexBoard::MoveToken(AHexToken * Token, int32 U, int32 V)
-{
+{	
 	if (Token && this->Tokens.Contains(Token)) {
 		FTransform transform = this->GetWorldLocationFromHexagonalCoordinates(U, V);
 		Token->SetActorTransform(transform);
+	}
+	else {
+		UE_LOG(LogTemp, Warning, TEXT("Token not valid"));
 	}
 }
 

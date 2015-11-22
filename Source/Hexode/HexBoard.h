@@ -33,6 +33,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Board")
 	void AddToken(class AHexToken* Token);
 
+	// Move a Token already on the board to the given hex coordinates
+	UFUNCTION(BlueprintCallable, Category = "Board")
+	void MoveToken(class AHexToken* Token, int32 U, int32 V);
+
 	UFUNCTION(BlueprintPure, Category = "Board")
 	TArray<class AHexToken*> GetTokens() const;
 

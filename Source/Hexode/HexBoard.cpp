@@ -25,12 +25,12 @@ void AHexBoard::BeginPlay()
 	
 }
 
-FTransform AHexBoard::GetWorldLocationFromHexagonalCoordinates(int32 U, int32 V) const
+FVector AHexBoard::GetWorldLocationFromHexagonalCoordinates(int32 U, int32 V) const
 {
 	float X = this->TileSize * sqrt(3) * (U + V / 2.0f);
 	float Y = this->TileSize * 1.5f * V;
 
-	return FTransform(FVector(X,Y,0.0f));
+	return FVector(X,Y,0.0f);
 }
 
 int32 AHexBoard::GetUFromWorldLocation(FVector location) const
@@ -58,10 +58,10 @@ int32 AHexBoard::Distance(int32 U1, int32 V1, int32 U2, int32 V2) const
 void AHexBoard::DisplayTile(int32 U, int32 V)
 {
 	// Get the transform location
-	FTransform transform = this->GetWorldLocationFromHexagonalCoordinates(U, V);
-	
+	FVector Vector = this->GetWorldLocationFromHexagonalCoordinates(U, V);
+	FTransform Transform = FTransform(Vector);
 	// Spawn the instance
-	BoardMesh->AddInstance(transform);
+	BoardMesh->AddInstance(Transform);
 }
 
 void AHexBoard::AddToken(AHexToken* Token)
@@ -73,15 +73,15 @@ void AHexBoard::AddToken(AHexToken* Token)
 	TArray<int32> HexCoord = Token->GetUV();
 	int32 U = HexCoord[0];
 	int32 V = HexCoord[1];
-	FTransform transform = this->GetWorldLocationFromHexagonalCoordinates(U, V);
-	Token->SetActorTransform(transform);
+	FVector Vector = this->GetWorldLocationFromHexagonalCoordinates(U, V);
+	Token->SetTargetMoveLocation(Vector);
 }
 
 void AHexBoard::MoveToken(AHexToken * Token, int32 U, int32 V)
 {	
 	if (Token && this->Tokens.Contains(Token)) {
-		FTransform transform = this->GetWorldLocationFromHexagonalCoordinates(U, V);
-		Token->SetActorTransform(transform);
+		FVector Vector= this->GetWorldLocationFromHexagonalCoordinates(U, V);
+		Token->SetTargetMoveLocation(Vector);
 	}
 	else {
 		UE_LOG(LogTemp, Warning, TEXT("Token not valid"));

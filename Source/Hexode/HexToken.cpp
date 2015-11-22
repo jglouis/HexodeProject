@@ -25,3 +25,13 @@ void AHexToken::SetUV(int32 U, int32 V)
 	this->V = V;
 }
 
+void AHexToken::SetTargetMoveLocation(FVector NewTargetLocation)
+{
+	this->TargetMoveLocation = NewTargetLocation;
+}
+
+FVector AHexToken::GetTargetMoveLocation() const
+{
+	return this->TargetMoveLocation;
+}
+

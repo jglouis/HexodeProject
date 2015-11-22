@@ -27,8 +27,20 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Token")
 	void SetUV(int32 U, int32 V);
 
+	// Set target location
+	UFUNCTION(BlueprintCallable, Category = "Token")
+	void SetTargetMoveLocation(FVector NewTargetLocation);
+
+	// Get target location
+	UFUNCTION(BlueprintPure, Category = "Token")
+	FVector GetTargetMoveLocation() const;
+
+
 private:
 	int32 U;
 	int32 V;
+
+	// target location for the movement
+	FVector TargetMoveLocation;
 	
 };

@@ -33,6 +33,21 @@ FTransform AHexBoard::GetWorldLocationFromHexagonalCoordinates(int32 U, int32 V)
 	return FTransform(FVector(X,Y,0.0f));
 }
 
+int32 AHexBoard::GetUFromWorldLocation(FVector location) const
+{
+	float X = location.X;
+	float Y = location.Y;
+
+	return round((X * sqrt(3.0f) / 3.0f - Y / 3.0f) / this->TileSize);
+}
+
+int32 AHexBoard::GetVFromWorldLocation(FVector location) const
+{
+	float Y = location.Y;
+
+	return round(Y * 2.0f / 3.0f / this->TileSize);
+}
+
 int32 AHexBoard::Distance(int32 U1, int32 V1, int32 U2, int32 V2) const
 {
 	return (abs(U1 - U2)

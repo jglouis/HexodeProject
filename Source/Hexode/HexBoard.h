@@ -30,6 +30,10 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Board")
 	int32 GetVFromWorldLocation(FVector location) const;
 
+	// Get the hexagonal coordinate from World location
+	UFUNCTION(BlueprintPure, Category = "Board")
+	FHexCoordinate GetHexCoordFromWorldLocation(FVector location) const;
+
 	// Get the distance between two hexagonal coordinates
 	UFUNCTION(BlueprintPure, Category = "Board")
 	int32 Distance(int32 U1, int32 V1, int32 U2, int32 V2) const;
@@ -44,7 +48,7 @@ public:
 
 	// Move a Token already on the board to the given hex coordinates
 	UFUNCTION(BlueprintCallable, Category = "Board")
-	void MoveToken(class AHexToken* Token, int32 U, int32 V);
+	void MoveToken(class AHexToken* Token, FHexCoordinate Coord);
 
 	// Get an array of all the Tokens on the board
 	UFUNCTION(BlueprintPure, Category = "Board")

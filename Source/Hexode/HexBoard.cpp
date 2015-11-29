@@ -49,6 +49,17 @@ int32 AHexBoard::GetVFromWorldLocation(FVector location) const
 	return round(Y * 2.0f / 3.0f / this->TileSize);
 }
 
+FHexCoordinate AHexBoard::GetHexCoordFromWorldLocation(FVector location) const
+{
+	float X = location.X;
+	float Y = location.Y;
+
+	int32 U = round((X * sqrt(3.0f) / 3.0f - Y / 3.0f) / this->TileSize);
+	int32 V = round(Y * 2.0f / 3.0f / this->TileSize);
+
+	return FHexCoordinate(U, V);
+}
+
 int32 AHexBoard::Distance(int32 U1, int32 V1, int32 U2, int32 V2) const
 {
 	return (abs(U1 - U2)
@@ -71,22 +82,20 @@ void AHexBoard::AddToken(AHexToken* Token)
 	this->Tokens.Add(Token);
 
 	// Place the token on the appropriate coordinates
-	int32 U = Token->GetUVCoordinate().U;
-	int32 V = Token->GetUVCoordinate().V;
 	FVector Vector = this->GetWorldLocationFromHexCoordinate(Token->GetUVCoordinate());
 
 	// Set target move location for the token
-	this->MoveToken(Token, U, V);
+	this->MoveToken(Token, Token->GetUVCoordinate());
 }
 
-void AHexBoard::MoveToken(AHexToken * Token, int32 U, int32 V)
+void AHexBoard::MoveToken(AHexToken * Token, FHexCoordinate Coord)
 {	
 	if (Token && this->Tokens.Contains(Token)) {
-		FVector Vector= this->GetWorldLocationFromHexCoordinate(FHexCoordinate(U, V));
+		FVector Vector= this->GetWorldLocationFromHexCoordinate(Coord);
 		// Set tokens's target move location
 		Token->SetTargetMoveLocation(Vector);
 		// Set token's UV location
-		Token->SetUV(U, V);
+		Token->SetUV(Coord.U, Coord.V);
 	}
 	else {
 		UE_LOG(LogTemp, Warning, TEXT("Token not valid"));

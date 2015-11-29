@@ -4,6 +4,7 @@
 #include "HexBoard.h"
 #include <math.h>
 #include "HexToken.h"
+#include "HexCoordinate.h"
 
 
 // Sets default values
@@ -107,6 +108,8 @@ void AHexBoard::UpdateVisibleLocations()
 	{
 		int32 U = Token->GetUV()[0];
 		int32 V = Token->GetUV()[1];
+
+		FHexCoordinate Coordinate(U,V);
 
 		this->DisplayTile(U, V);
 		// Iterate over all the tiles around the token locations

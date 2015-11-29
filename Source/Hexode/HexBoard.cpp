@@ -74,7 +74,9 @@ void AHexBoard::AddToken(AHexToken* Token)
 	int32 U = HexCoord[0];
 	int32 V = HexCoord[1];
 	FVector Vector = this->GetWorldLocationFromHexagonalCoordinates(U, V);
-	Token->SetTargetMoveLocation(Vector);
+
+	// Set target move location for the token
+	this->MoveToken(Token, U, V);
 }
 
 void AHexBoard::MoveToken(AHexToken * Token, int32 U, int32 V)
@@ -86,9 +88,28 @@ void AHexBoard::MoveToken(AHexToken * Token, int32 U, int32 V)
 	else {
 		UE_LOG(LogTemp, Warning, TEXT("Token not valid"));
 	}
+
+	// Update the board visible locations
+	this->UpdateVisibleLocations();
 }
 
 TArray<class AHexToken*> AHexBoard::GetTokens() const
 {
 	return TArray<class AHexToken*>();
+}
+
+void AHexBoard::UpdateVisibleLocations()
+{
+	// Clear all the instances
+	this->BoardMesh->ClearInstances();
+
+	for (AHexToken* Token : this->Tokens)
+	{
+		int32 U = Token->GetUV()[0];
+		int32 V = Token->GetUV()[1];
+
+		this->DisplayTile(U, V);
+		// Iterate over all the tiles around the token locations
+
+	}
 }

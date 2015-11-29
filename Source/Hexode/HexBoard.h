@@ -66,5 +66,7 @@ private:
 	// An array of all the tokens on the board
 	TArray<class AHexToken*> Tokens;
 
-	
+	// Update the board visible locations
+	void UpdateVisibleLocations();
+
 };

@@ -26,12 +26,12 @@ void AHexBoard::BeginPlay()
 	
 }
 
-FVector AHexBoard::GetWorldLocationFromHexagonalCoordinates(int32 U, int32 V) const
+FVector AHexBoard::GetWorldLocationFromHexCoordinate(FHexCoordinate Coord) const
 {
-	float X = this->TileSize * sqrt(3) * (U + V / 2.0f);
-	float Y = this->TileSize * 1.5f * V;
+	float X = this->TileSize * sqrt(3) * (Coord.U + Coord.V / 2.0f);
+	float Y = this->TileSize * 1.5f * Coord.V;
 
-	return FVector(X,Y,0.0f);
+	return FVector(X, Y, 0.0f);
 }
 
 int32 AHexBoard::GetUFromWorldLocation(FVector location) const
@@ -59,7 +59,7 @@ int32 AHexBoard::Distance(int32 U1, int32 V1, int32 U2, int32 V2) const
 void AHexBoard::DisplayTile(int32 U, int32 V)
 {
 	// Get the transform location
-	FVector Vector = this->GetWorldLocationFromHexagonalCoordinates(U, V);
+	FVector Vector = this->GetWorldLocationFromHexCoordinate(FHexCoordinate(U,V)); //TODO
 	FTransform Transform = FTransform(Vector);
 	// Spawn the instance
 	BoardMesh->AddInstance(Transform);
@@ -73,7 +73,7 @@ void AHexBoard::AddToken(AHexToken* Token)
 	// Place the token on the appropriate coordinates
 	int32 U = Token->GetUVCoordinate().U;
 	int32 V = Token->GetUVCoordinate().V;
-	FVector Vector = this->GetWorldLocationFromHexagonalCoordinates(U, V);
+	FVector Vector = this->GetWorldLocationFromHexCoordinate(Token->GetUVCoordinate());
 
 	// Set target move location for the token
 	this->MoveToken(Token, U, V);
@@ -82,7 +82,7 @@ void AHexBoard::AddToken(AHexToken* Token)
 void AHexBoard::MoveToken(AHexToken * Token, int32 U, int32 V)
 {	
 	if (Token && this->Tokens.Contains(Token)) {
-		FVector Vector= this->GetWorldLocationFromHexagonalCoordinates(U, V);
+		FVector Vector= this->GetWorldLocationFromHexCoordinate(FHexCoordinate(U, V));
 		// Set tokens's target move location
 		Token->SetTargetMoveLocation(Vector);
 		// Set token's UV location

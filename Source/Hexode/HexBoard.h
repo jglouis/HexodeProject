@@ -3,6 +3,7 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
+#include "HexCoordinate.h"
 #include "HexBoard.generated.h"
 
 UCLASS()
@@ -19,7 +20,7 @@ public:
 
 	// Get the World location from hexagonal coordinates
 	UFUNCTION(BlueprintPure, Category = "Board")
-	FVector GetWorldLocationFromHexagonalCoordinates(int32 U, int32 V) const;
+	FVector GetWorldLocationFromHexCoordinate(FHexCoordinate Coord) const;
 
 	// Get the U hexagonal coordinate from World location
 	UFUNCTION(BlueprintPure, Category = "Board")

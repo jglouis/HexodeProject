@@ -124,9 +124,7 @@ void AHexBoard::UpdateVisibleLocations()
 			{
 				if (this->Distance(U, V, u, v) <= 3)
 				{
-					FHexCoordinate CoordinateToAdd;
-					CoordinateToAdd.U = u;
-					CoordinateToAdd.V = v;
+					FHexCoordinate CoordinateToAdd(u,v);
 					// Add the coordinate uniquely so a tile is not displayed twice
 					Coordinates.AddUnique(CoordinateToAdd);
 				}				

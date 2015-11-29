@@ -5,12 +5,12 @@
 
 FHexCoordinate::FHexCoordinate()
 {
-	U = 0;
-	V = 0;
+	this->U = 0;
+	this->V = 0;
 }
 
-FHexCoordinate::FHexCoordinate(int32 U, int32 V)
+FHexCoordinate::FHexCoordinate(int32 CoordU, int32 CoordV)
 {
-	U = U;
-	V = V;
+	this->U = CoordU;
+	this->V = CoordV;
 }

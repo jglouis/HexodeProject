@@ -18,13 +18,6 @@ public:
 	virtual void BeginPlay() override;
 
 	// Get the hexagonal coordinates
-	inline TArray<int32> GetUV() const { 
-		TArray<int32> HexCoord = TArray<int32>();
-		HexCoord.Add(U);
-		HexCoord.Add(V);
-		return HexCoord; }
-
-	// Get the hexagonal coordinates
 	UFUNCTION(BlueprintPure, Category = "Token")
 	FHexCoordinate GetUVCoordinate() const;
 

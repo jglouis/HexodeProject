@@ -71,9 +71,8 @@ void AHexBoard::AddToken(AHexToken* Token)
 	this->Tokens.Add(Token);
 
 	// Place the token on the appropriate coordinates
-	TArray<int32> HexCoord = Token->GetUV();
-	int32 U = HexCoord[0];
-	int32 V = HexCoord[1];
+	int32 U = Token->GetUVCoordinate().U;
+	int32 V = Token->GetUVCoordinate().V;
 	FVector Vector = this->GetWorldLocationFromHexagonalCoordinates(U, V);
 
 	// Set target move location for the token

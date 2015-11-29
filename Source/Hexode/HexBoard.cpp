@@ -136,6 +136,5 @@ void AHexBoard::UpdateVisibleLocations()
 	for (FHexCoordinate CoordToDisplay : Coordinates)
 	{
 		this->DisplayTile(CoordToDisplay.U, CoordToDisplay.V);
-		UE_LOG(LogTemp, Warning, TEXT("Displaying location (%d,%d)..."), CoordToDisplay.U, CoordToDisplay.V);
 	}
 }

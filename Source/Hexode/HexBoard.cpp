@@ -67,10 +67,10 @@ int32 AHexBoard::Distance(int32 U1, int32 V1, int32 U2, int32 V2) const
 		+ abs(V1 - V2)) / 2;
 }
 
-void AHexBoard::DisplayTile(int32 U, int32 V)
+void AHexBoard::DisplayTile(FHexCoordinate Coord)
 {
 	// Get the transform location
-	FVector Vector = this->GetWorldLocationFromHexCoordinate(FHexCoordinate(U,V)); //TODO
+	FVector Vector = this->GetWorldLocationFromHexCoordinate(Coord);
 	FTransform Transform = FTransform(Vector);
 	// Spawn the instance
 	BoardMesh->AddInstance(Transform);
@@ -143,6 +143,6 @@ void AHexBoard::UpdateVisibleLocations()
 	// Display the tiles in the set
 	for (FHexCoordinate CoordToDisplay : Coordinates)
 	{
-		this->DisplayTile(CoordToDisplay.U, CoordToDisplay.V);
+		this->DisplayTile(CoordToDisplay);
 	}
 }

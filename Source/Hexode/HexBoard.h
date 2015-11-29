@@ -40,7 +40,7 @@ public:
 
 	// Display a tile at the given location
 	UFUNCTION(BlueprintCallable, Category = "Board")
-	void DisplayTile(int32 U, int32 V);
+	void DisplayTile(FHexCoordinate Coord);
 
 	// Add a Token on the board and position it to the apropriate transform location
 	UFUNCTION(BlueprintCallable, Category = "Board")

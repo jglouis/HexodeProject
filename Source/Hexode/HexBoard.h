@@ -22,23 +22,15 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Board")
 	FVector GetWorldLocationFromHexCoordinate(FHexCoordinate Coord) const;
 
-	// Get the U hexagonal coordinate from World location
-	UFUNCTION(BlueprintPure, Category = "Board")
-	int32 GetUFromWorldLocation(FVector location) const;
-
-	// Get the V hexagonal coordinate from World location
-	UFUNCTION(BlueprintPure, Category = "Board")
-	int32 GetVFromWorldLocation(FVector location) const;
-
 	// Get the hexagonal coordinate from World location
 	UFUNCTION(BlueprintPure, Category = "Board")
 	FHexCoordinate GetHexCoordFromWorldLocation(FVector location) const;
 
 	// Get the distance between two hexagonal coordinates
 	UFUNCTION(BlueprintPure, Category = "Board")
-	int32 Distance(int32 U1, int32 V1, int32 U2, int32 V2) const;
+	int32 Distance(FHexCoordinate Coord1, FHexCoordinate Coord2) const;
 
-	// Display a tile at the given location
+	// Display a tile at the given hexagonal coordinate
 	UFUNCTION(BlueprintCallable, Category = "Board")
 	void DisplayTile(FHexCoordinate Coord);
 

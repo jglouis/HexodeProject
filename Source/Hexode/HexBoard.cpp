@@ -34,21 +34,6 @@ FVector AHexBoard::GetWorldLocationFromHexCoordinate(FHexCoordinate Coord) const
 	return FVector(X, Y, 0.0f);
 }
 
-int32 AHexBoard::GetUFromWorldLocation(FVector location) const
-{
-	float X = location.X;
-	float Y = location.Y;
-
-	return round((X * sqrt(3.0f) / 3.0f - Y / 3.0f) / this->TileSize);
-}
-
-int32 AHexBoard::GetVFromWorldLocation(FVector location) const
-{
-	float Y = location.Y;
-
-	return round(Y * 2.0f / 3.0f / this->TileSize);
-}
-
 FHexCoordinate AHexBoard::GetHexCoordFromWorldLocation(FVector location) const
 {
 	float X = location.X;
@@ -60,8 +45,12 @@ FHexCoordinate AHexBoard::GetHexCoordFromWorldLocation(FVector location) const
 	return FHexCoordinate(U, V);
 }
 
-int32 AHexBoard::Distance(int32 U1, int32 V1, int32 U2, int32 V2) const
+int32 AHexBoard::Distance(FHexCoordinate Coord1, FHexCoordinate Coord2) const
 {
+	int32 U1 = Coord1.U;
+	int32 V1 = Coord1.V;
+	int32 U2 = Coord2.U;
+	int32 V2 = Coord2.V;
 	return (abs(U1 - U2)
 		+ abs(U1 + V1 - U2 - V2)
 		+ abs(V1 - V2)) / 2;
@@ -130,11 +119,11 @@ void AHexBoard::UpdateVisibleLocations()
 		{
 			for (int v = V - VisionRadius; v <= V + VisionRadius; v++)
 			{
-				if (this->Distance(U, V, u, v) <= 3)
+				FHexCoordinate coord(u, v);
+				if (this->Distance(Token->GetUVCoordinate(), coord) <= 3)
 				{
-					FHexCoordinate CoordinateToAdd(u,v);
 					// Add the coordinate uniquely so a tile is not displayed twice
-					Coordinates.AddUnique(CoordinateToAdd);
+					Coordinates.AddUnique(coord);
 				}				
 			}
 		}

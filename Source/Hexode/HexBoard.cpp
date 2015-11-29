@@ -5,6 +5,7 @@
 #include <math.h>
 #include "HexToken.h"
 #include "HexCoordinate.h"
+#include "Runtime/Core/Public/Containers/Set.h"
 
 
 // Sets default values
@@ -110,6 +111,9 @@ void AHexBoard::UpdateVisibleLocations()
 		int32 V = Token->GetUV()[1];
 
 		FHexCoordinate Coordinate(U,V);
+
+		TSet<FHexCoordinate> Coordinates = TSet<FHexCoordinate>();
+		Coordinates.Add(Coordinate);
 
 		this->DisplayTile(U, V);
 		// Iterate over all the tiles around the token locations

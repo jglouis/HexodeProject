@@ -20,5 +20,15 @@ struct FHexCoordinate
 	
 	FHexCoordinate();
 	FHexCoordinate(int32, int32);
+
+	friend FORCEINLINE uint32 GetTypeHash(const FHexCoordinate& HexCoordinate)
+	{
+		return HexCoordinate.U * 100 + HexCoordinate.V;
+	}
+
+	inline bool operator==(const FHexCoordinate& HexCoordinate) const
+	{
+		return ((HexCoordinate.U == this-> U) && (HexCoordinate.V == this->V));
+	}
 	
 };

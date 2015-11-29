@@ -2,6 +2,7 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
+#include "HexCoordinate.h"
 #include "HexToken.generated.h"
 
 UCLASS()
@@ -22,6 +23,10 @@ public:
 		HexCoord.Add(U);
 		HexCoord.Add(V);
 		return HexCoord; }
+
+	// Get the hexagonal coordinates
+	UFUNCTION(BlueprintPure, Category = "Token")
+	FHexCoordinate GetUVCoordinate() const;
 
 	// Set Hexagonal coordinates
 	UFUNCTION(BlueprintCallable, Category = "Token")

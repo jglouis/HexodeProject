@@ -8,14 +8,14 @@
 /**
  * 
  */
-USTRUCT()
+USTRUCT(BlueprintType)
 struct FHexCoordinate
 {
 	GENERATED_USTRUCT_BODY()
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	int32 U;
-	UPROPERTY()
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	int32 V;
 	
 	FHexCoordinate();

@@ -2,6 +2,7 @@
 
 #include "Hexode.h"
 #include "HexToken.h"
+#include "HexCoordinate.h"
 
 
 // Sets default values
@@ -17,6 +18,11 @@ void AHexToken::BeginPlay()
 {
 	Super::BeginPlay();
 	
+}
+
+inline FHexCoordinate AHexToken::GetUVCoordinate() const
+{
+	return FHexCoordinate(U, V);
 }
 
 void AHexToken::SetUV(int32 U, int32 V)

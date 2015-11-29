@@ -21,14 +21,14 @@ struct FHexCoordinate
 	FHexCoordinate();
 	FHexCoordinate(int32, int32);
 
-	friend FORCEINLINE uint32 GetTypeHash(const FHexCoordinate& HexCoordinate)
+	friend inline uint32 GetTypeHash(const FHexCoordinate & HexCoordinate)
 	{
-		return HexCoordinate.U * 100 + HexCoordinate.V;
+		return HexCoordinate.U * 10 + HexCoordinate.V +50000;
 	}
 
-	inline bool operator==(const FHexCoordinate& HexCoordinate) const
+	inline bool operator==(const FHexCoordinate & HexCoordinate) const
 	{
-		return ((HexCoordinate.U == this-> U) && (HexCoordinate.V == this->V));
+		return (HexCoordinate.U == this-> U) && (HexCoordinate.V == this->V);
 	}
 	
 };

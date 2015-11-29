@@ -5,7 +5,6 @@
 #include <math.h>
 #include "HexToken.h"
 #include "HexCoordinate.h"
-#include "Runtime/Core/Public/Containers/Set.h"
 
 
 // Sets default values
@@ -85,7 +84,10 @@ void AHexBoard::MoveToken(AHexToken * Token, int32 U, int32 V)
 {	
 	if (Token && this->Tokens.Contains(Token)) {
 		FVector Vector= this->GetWorldLocationFromHexagonalCoordinates(U, V);
+		// Set tokens's target move location
 		Token->SetTargetMoveLocation(Vector);
+		// Set token's UV location
+		Token->SetUV(U, V);
 	}
 	else {
 		UE_LOG(LogTemp, Warning, TEXT("Token not valid"));
@@ -105,18 +107,37 @@ void AHexBoard::UpdateVisibleLocations()
 	// Clear all the instances
 	this->BoardMesh->ClearInstances();
 
+	// Set that will contain all the coordinates to display (no double)
+	TArray<FHexCoordinate> Coordinates = TArray<FHexCoordinate>();
+
 	for (AHexToken* Token : this->Tokens)
 	{
-		int32 U = Token->GetUV()[0];
-		int32 V = Token->GetUV()[1];
+		// Get token coordinates
+		int32 U = Token->GetUVCoordinate().U;
+		int32 V = Token->GetUVCoordinate().V;
 
-		FHexCoordinate Coordinate(U,V);
-
-		TSet<FHexCoordinate> Coordinates = TSet<FHexCoordinate>();
-		Coordinates.Add(Coordinate);
-
-		this->DisplayTile(U, V);
 		// Iterate over all the tiles around the token locations
+		const int VisionRadius = 3;
+		for (int u = U - VisionRadius; u <= U + VisionRadius; u++)
+		{
+			for (int v = V - VisionRadius; v <= V + VisionRadius; v++)
+			{
+				if (this->Distance(U, V, u, v) <= 3)
+				{
+					FHexCoordinate CoordinateToAdd;
+					CoordinateToAdd.U = u;
+					CoordinateToAdd.V = v;
+					// Add the coordinate uniquely so a tile is not displayed twice
+					Coordinates.AddUnique(CoordinateToAdd);
+				}				
+			}
+		}
+	}
 
+	// Display the tiles in the set
+	for (FHexCoordinate CoordToDisplay : Coordinates)
+	{
+		this->DisplayTile(CoordToDisplay.U, CoordToDisplay.V);
+		UE_LOG(LogTemp, Warning, TEXT("Displaying location (%d,%d)..."), CoordToDisplay.U, CoordToDisplay.V);
 	}
 }

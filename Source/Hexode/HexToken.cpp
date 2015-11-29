@@ -20,9 +20,12 @@ void AHexToken::BeginPlay()
 	
 }
 
-inline FHexCoordinate AHexToken::GetUVCoordinate() const
+FHexCoordinate AHexToken::GetUVCoordinate() const
 {
-	return FHexCoordinate(U, V);
+	FHexCoordinate Coord;
+	Coord.U = this->U;
+	Coord.V = this->V;
+	return Coord;
 }
 
 void AHexToken::SetUV(int32 U, int32 V)

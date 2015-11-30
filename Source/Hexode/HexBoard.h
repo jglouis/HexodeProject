@@ -28,7 +28,7 @@ public:
 
 	// Get the distance between two hexagonal coordinates
 	UFUNCTION(BlueprintPure, Category = "Board")
-	int32 Distance(FHexCoordinate Coord1, FHexCoordinate Coord2) const;
+	static int32 Distance(FHexCoordinate Coord1, FHexCoordinate Coord2);
 
 	// Display a tile at the given hexagonal coordinate
 	UFUNCTION(BlueprintCallable, Category = "Board")

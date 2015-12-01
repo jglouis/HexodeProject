@@ -27,3 +27,13 @@ struct FHexCoordinate
 	}
 	
 };
+
+UCLASS()
+class HEXODE_API UHexUtil :	public UBlueprintFunctionLibrary
+{
+	GENERATED_UCLASS_BODY()
+
+	/** Get the distance between two hexagonal coordinates */
+	UFUNCTION(BlueprintPure, Category = "HexUtil")
+	static int32 Distance(FHexCoordinate Coord1, FHexCoordinate Coord2);
+};

@@ -45,17 +45,6 @@ FHexCoordinate AHexBoard::GetHexCoordFromWorldLocation(FVector location) const
 	return FHexCoordinate(U, V);
 }
 
-int32 AHexBoard::Distance(FHexCoordinate Coord1, FHexCoordinate Coord2)
-{
-	int32 U1 = Coord1.U;
-	int32 V1 = Coord1.V;
-	int32 U2 = Coord2.U;
-	int32 V2 = Coord2.V;
-	return (abs(U1 - U2)
-		+ abs(U1 + V1 - U2 - V2)
-		+ abs(V1 - V2)) / 2;
-}
-
 void AHexBoard::DisplayTile(FHexCoordinate Coord)
 {
 	// Get the transform location
@@ -120,7 +109,7 @@ void AHexBoard::UpdateVisibleLocations()
 			for (int v = V - VisionRadius; v <= V + VisionRadius; v++)
 			{
 				FHexCoordinate coord(u, v);
-				if (Distance(Token->GetUVCoordinate(), coord) <= VisionRadius)
+				if (UHexUtil::Distance(Token->GetUVCoordinate(), coord) <= VisionRadius)
 				{
 					// Add the coordinate uniquely so a tile is not displayed twice
 					Coordinates.AddUnique(coord);

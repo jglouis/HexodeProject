@@ -24,11 +24,7 @@ public:
 
 	// Get the hexagonal coordinate from World location
 	UFUNCTION(BlueprintPure, Category = "Board")
-	FHexCoordinate GetHexCoordFromWorldLocation(FVector location) const;
-
-	// Get the distance between two hexagonal coordinates
-	UFUNCTION(BlueprintPure, Category = "Board")
-	static int32 Distance(FHexCoordinate Coord1, FHexCoordinate Coord2);
+	FHexCoordinate GetHexCoordFromWorldLocation(FVector location) const;	
 
 	// Display a tile at the given hexagonal coordinate
 	UFUNCTION(BlueprintCallable, Category = "Board")

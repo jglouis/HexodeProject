@@ -15,11 +15,6 @@ FHexCoordinate::FHexCoordinate(int32 CoordU, int32 CoordV)
 	this->V = CoordV;
 }
 
-UHexUtil::UHexUtil(const FObjectInitializer& ObjectInitializer)
-	: Super(ObjectInitializer)
-{
-
-}
 
 int32 UHexUtil::Distance(FHexCoordinate Coord1, FHexCoordinate Coord2)
 {

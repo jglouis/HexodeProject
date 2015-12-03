@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Engine/UserDefinedStruct.h"
+#include "Kismet/BlueprintFunctionLibrary.h"
 #include "HexCoordinate.generated.h"
 
 /**
@@ -31,8 +32,9 @@ struct FHexCoordinate
 UCLASS()
 class HEXODE_API UHexUtil :	public UBlueprintFunctionLibrary
 {
-	GENERATED_UCLASS_BODY()
+	GENERATED_BODY()
 
+public:
 	/** Get the distance between two hexagonal coordinates */
 	UFUNCTION(BlueprintPure, Category = "HexUtil")
 	static int32 Distance(FHexCoordinate Coord1, FHexCoordinate Coord2);

@@ -106,7 +106,7 @@ void AHexBoard::UpdateVisibleLocations()
 		int32 V = Token->GetUVCoordinate().V;
 
 		// Iterate over all the tiles around the token locations
-		const int VisionRadius = 3;
+		const int VisionRadius = Token->GetTileRadius();
 		for (int u = U - VisionRadius; u <= U + VisionRadius; u++)
 		{
 			for (int v = V - VisionRadius; v <= V + VisionRadius; v++)

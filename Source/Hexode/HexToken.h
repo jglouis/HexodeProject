@@ -33,12 +33,17 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Token")
 	FVector GetTargetMoveLocation() const;
 
+	inline int32 GetTileRadius() const { return TileRadius; };
 
 private:
 	int32 U;
 	int32 V;
 
-	// target location for the movement
+	// Visible tile radius around the token when placed on the board when on the board, must be >1
+	UPROPERTY(EditAnywhere, Category = "Token")
+	int32 TileRadius = 3;
+
+	// Target location for the movement
 	FVector TargetMoveLocation;
 	
 };

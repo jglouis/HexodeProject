@@ -52,9 +52,13 @@ protected:
 	uint8 TileSize;
 
 private:
-	// The Instanced static mesh that represents the hexagonal board
+	// The instanced static mesh that represents the hexagonal board
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Board", Meta = (AllowPrivateAccess = "true"))
 	class UInstancedStaticMeshComponent* BoardMesh;
+
+	// The static mesh representing the mesh when cursor is over
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Board", Meta = (AllowPrivateAccess = "true"))
+	class UStaticMeshComponent* CursorOverBoardMesh;
 
 	// An array of all the tokens on the board
 	TArray<class AHexToken*> Tokens;

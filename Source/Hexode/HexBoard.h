@@ -60,6 +60,10 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Board", Meta = (AllowPrivateAccess = "true"))
 	class UStaticMeshComponent* CursorOverBoardMesh;
 
+	// The collision boc
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Board", Meta = (AllowPrivateAccess = "true"))
+	class UBoxComponent* CollisionBox;
+
 	// An array of all the tokens on the board
 	TArray<class AHexToken*> Tokens;
 

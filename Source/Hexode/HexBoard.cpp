@@ -11,11 +11,17 @@
 AHexBoard::AHexBoard()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = true;	
 
-	// Create the instanced static meshes
+	// Create the instanced static mesh
 	BoardMesh = CreateAbstractDefaultSubobject<UInstancedStaticMeshComponent>(TEXT("BoardMesh"));
 	BoardMesh->AttachTo(RootComponent);
+
+	// Define the root component as a collision box
+	CollisionBox = CreateAbstractDefaultSubobject<UBoxComponent>(TEXT("CollisionBox"));
+	CollisionBox->AttachTo(RootComponent);
+
+	// Create the selection static mesh
 	CursorOverBoardMesh = CreateAbstractDefaultSubobject<UStaticMeshComponent>(TEXT("CursorOverBoardMesh"));
 	CursorOverBoardMesh->AttachTo(RootComponent);
 	

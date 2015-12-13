@@ -3,13 +3,14 @@
 #include "Hexode.h"
 #include "HexToken.h"
 #include "HexCoordinate.h"
-
+#include "UnrealNetwork.h"
 
 // Sets default values
 AHexToken::AHexToken()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	bReplicates = true;
 
 }
 
@@ -42,5 +43,12 @@ void AHexToken::SetTargetMoveLocation(FVector NewTargetLocation)
 FVector AHexToken::GetTargetMoveLocation() const
 {
 	return this->TargetMoveLocation;
+}
+
+void AHexToken::GetLifetimeReplicatedProps(TArray< FLifetimeProperty > & OutLifetimeProps) const
+{
+	DOREPLIFETIME(AHexToken, U);
+	DOREPLIFETIME(AHexToken, V);
+	DOREPLIFETIME(AHexToken, TargetMoveLocation)
 }
 

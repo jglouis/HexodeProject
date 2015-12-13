@@ -20,7 +20,7 @@ void AHexToken::BeginPlay()
 	
 }
 
-FHexCoordinate AHexToken::GetUVCoordinate() const
+FHexCoordinate AHexToken::GetHexCoordinate() const
 {
 	return Coord;
 }

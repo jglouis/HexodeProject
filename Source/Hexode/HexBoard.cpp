@@ -69,7 +69,7 @@ void AHexBoard::AddToken(AHexToken* Token)
 	this->Tokens.Add(Token);
 
 	// Place the token on the appropriate coordinates
-	FVector Location = this->GetWorldLocationFromHexCoordinate(Token->GetUVCoordinate());
+	FVector Location = this->GetWorldLocationFromHexCoordinate(Token->GetHexCoordinate());
 
 	// Set target move location for the token
 	Token->SetTargetMoveLocation(Location);
@@ -91,8 +91,8 @@ void AHexBoard::UpdateVisibleLocations()
 	for (AHexToken* Token : this->Tokens)
 	{
 		// Get token coordinates
-		int32 U = Token->GetUVCoordinate().U;
-		int32 V = Token->GetUVCoordinate().V;
+		int32 U = Token->GetHexCoordinate().U;
+		int32 V = Token->GetHexCoordinate().V;
 
 		// Iterate over all the tiles around the token locations
 		const int VisionRadius = Token->GetTileRadius();
@@ -101,7 +101,7 @@ void AHexBoard::UpdateVisibleLocations()
 			for (int v = V - VisionRadius; v <= V + VisionRadius; v++)
 			{
 				FHexCoordinate coord(u, v);
-				if (UHexUtil::Distance(Token->GetUVCoordinate(), coord) <= VisionRadius)
+				if (UHexUtil::Distance(Token->GetHexCoordinate(), coord) <= VisionRadius)
 				{
 					// Add the coordinate uniquely so a tile is not displayed twice
 					Coordinates.AddUnique(coord);

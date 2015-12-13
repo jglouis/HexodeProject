@@ -19,7 +19,7 @@ public:
 
 	// Get the hexagonal coordinates
 	UFUNCTION(BlueprintPure, Category = "Token")
-	FHexCoordinate GetUVCoordinate() const;
+	FHexCoordinate GetHexCoordinate() const;
 
 	// Set Hexagonal coordinates
 	UFUNCTION(BlueprintCallable, Category = "Token")

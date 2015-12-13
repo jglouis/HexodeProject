@@ -33,6 +33,7 @@ public:
 
 protected:
 	//Hex Coordinate
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Token")
 	FHexCoordinate Coord;
 
 	// Visible tile radius around the token when placed on the board when on the board, must be >1

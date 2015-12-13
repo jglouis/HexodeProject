@@ -3,7 +3,6 @@
 
 #include "GameFramework/Actor.h"
 #include "HexCoordinate.h"
-#include "Core.h"
 #include "HexToken.generated.h"
 
 UCLASS()
@@ -37,9 +36,9 @@ public:
 	inline int32 GetTileRadius() const { return TileRadius; };
 
 protected:
-	UPROPERTY(Replicated, BlueprintReadWrite, EditAnywhere, Category = "Token")
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Token")
 	int32 U;
-	UPROPERTY(Replicated, BlueprintReadWrite, EditAnywhere, Category = "Token")
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Token")
 	int32 V;
 	// Visible tile radius around the token when placed on the board when on the board, must be >1
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Token")
@@ -47,11 +46,5 @@ protected:
 
 private:
 	// Target location for the movement
-	UPROPERTY(Replicated)
 	FVector TargetMoveLocation;
-
-	UFUNCTION(reliable, server, WithValidation)
-	void ServerSetTargetMoveLocation(FVector NewTargetMoveLocation);
-	virtual void ServerSetTargetMoveLocation_Implementation(FVector NewTargetMoveLocation);
-	virtual bool ServerSetTargetMoveLocation_Validate(FVector NewTargetMoveLocation);
 };

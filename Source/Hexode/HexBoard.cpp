@@ -5,14 +5,13 @@
 #include <math.h>
 #include "HexToken.h"
 #include "HexCoordinate.h"
-#include "UnrealNetwork.h"
 
 
 // Sets default values
 AHexBoard::AHexBoard()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;	
+	PrimaryActorTick.bCanEverTick = true;
 
 	// Create the instanced static mesh
 	BoardMesh = CreateAbstractDefaultSubobject<UInstancedStaticMeshComponent>(TEXT("BoardMesh"));
@@ -78,17 +77,18 @@ void AHexBoard::AddToken(AHexToken* Token)
 
 void AHexBoard::MoveToken(AHexToken * Token, FHexCoordinate Coord)
 {	
-	if (Token && this->Tokens.Contains(Token)) {
-		UE_LOG(LogTemp, Warning, TEXT("Moving"));
+	UE_LOG(LogTemp, Warning, TEXT("Coordinate is (%d,%d)"), Coord.U, Coord.V);
 
+	if (Token && this->Tokens.Contains(Token))
+	{
 		FVector Vector= this->GetWorldLocationFromHexCoordinate(Coord);
 		// Set tokens's target move location
 		Token->SetTargetMoveLocation(Vector);
 		// Set token's UV location
-		Token->SetUV(Coord.U, Coord.V);
-		
+		Token->SetUV(Coord.U, Coord.V);		
 	}
-	else {
+	else
+	{
 		UE_LOG(LogTemp, Warning, TEXT("Token not valid"));
 	}
 
@@ -138,7 +138,3 @@ void AHexBoard::UpdateVisibleLocations()
 	}
 }
 
-void AHexBoard::GetLifetimeReplicatedProps(TArray< FLifetimeProperty > & OutLifetimeProps) const
-{
-	DOREPLIFETIME(AHexBoard, Tokens);
-}

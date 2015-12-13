@@ -67,12 +67,6 @@ void AHexBoard::AddToken(AHexToken* Token)
 {
 	// Adding the token to the array
 	this->Tokens.Add(Token);
-
-	// Place the token on the appropriate coordinates
-	FVector Location = this->GetWorldLocationFromHexCoordinate(Token->GetHexCoordinate());
-
-	// Set target move location for the token
-	Token->SetTargetMoveLocation(Location);
 }
 
 TArray<class AHexToken*> AHexBoard::GetTokens() const

@@ -35,13 +35,3 @@ void AHexToken::SetHexCoordinate(FHexCoordinate NewCoord)
 {
 	this->Coord = NewCoord;
 }
-
-void AHexToken::SetTargetMoveLocation(FVector NewTargetLocation)
-{
-	this->TargetMoveLocation = NewTargetLocation;
-}
-
-FVector AHexToken::GetTargetMoveLocation() const
-{
-	return this->TargetMoveLocation;
-}

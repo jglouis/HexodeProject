@@ -69,31 +69,10 @@ void AHexBoard::AddToken(AHexToken* Token)
 	this->Tokens.Add(Token);
 
 	// Place the token on the appropriate coordinates
-	FVector Vector = this->GetWorldLocationFromHexCoordinate(Token->GetUVCoordinate());
+	FVector Location = this->GetWorldLocationFromHexCoordinate(Token->GetUVCoordinate());
 
 	// Set target move location for the token
-	this->MoveToken(Token, Token->GetUVCoordinate());
-}
-
-void AHexBoard::MoveToken(AHexToken * Token, FHexCoordinate Coord)
-{	
-	UE_LOG(LogTemp, Warning, TEXT("Coordinate is (%d,%d)"), Coord.U, Coord.V);
-
-	if (Token && this->Tokens.Contains(Token))
-	{
-		FVector Vector= this->GetWorldLocationFromHexCoordinate(Coord);
-		// Set tokens's target move location
-		Token->SetTargetMoveLocation(Vector);
-		// Set token's UV location
-		Token->SetUV(Coord.U, Coord.V);		
-	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Token not valid"));
-	}
-
-	// Update the board visible locations
-	this->UpdateVisibleLocations();
+	Token->SetTargetMoveLocation(Location);
 }
 
 TArray<class AHexToken*> AHexBoard::GetTokens() const

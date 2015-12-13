@@ -22,16 +22,18 @@ void AHexToken::BeginPlay()
 
 FHexCoordinate AHexToken::GetUVCoordinate() const
 {
-	FHexCoordinate Coord;
-	Coord.U = this->U;
-	Coord.V = this->V;
 	return Coord;
 }
 
 void AHexToken::SetUV(int32 U, int32 V)
 {
-	this->U = U;
-	this->V = V;
+	this->Coord.U = U;
+	this->Coord.V = V;
+}
+
+void AHexToken::SetHexCoordinate(FHexCoordinate NewCoord)
+{
+	this->Coord = NewCoord;
 }
 
 void AHexToken::SetTargetMoveLocation(FVector NewTargetLocation)

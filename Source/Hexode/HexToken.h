@@ -25,6 +25,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Token")
 	void SetUV(int32 U, int32 V);
 
+	// Set Hexagonal coordinates
+	UFUNCTION(BlueprintCallable, Category = "Token")
+	void SetHexCoordinate(FHexCoordinate NewCoord);
+
 	// Set target location
 	UFUNCTION(BlueprintCallable, Category = "Token")
 	void SetTargetMoveLocation(FVector NewTargetLocation);
@@ -36,10 +40,9 @@ public:
 	inline int32 GetTileRadius() const { return TileRadius; };
 
 protected:
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Token")
-	int32 U;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Token")
-	int32 V;
+	//Hex Coordinate
+	FHexCoordinate Coord;
+
 	// Visible tile radius around the token when placed on the board when on the board, must be >1
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Token")
 	int32 TileRadius = 3;

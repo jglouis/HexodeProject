@@ -4,6 +4,7 @@
 
 #include "GameFramework/Actor.h"
 #include "HexCoordinate.h"
+#include "Core.h"
 #include "HexBoard.generated.h"
 
 UCLASS()
@@ -65,6 +66,7 @@ private:
 	class UBoxComponent* CollisionBox;
 
 	// An array of all the tokens on the board
+	UPROPERTY(Replicated)
 	TArray<class AHexToken*> Tokens;
 
 	// Update the board visible locations

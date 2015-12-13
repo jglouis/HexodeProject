@@ -5,6 +5,7 @@
 #include <math.h>
 #include "HexToken.h"
 #include "HexCoordinate.h"
+#include "UnrealNetwork.h"
 
 
 // Sets default values
@@ -78,11 +79,14 @@ void AHexBoard::AddToken(AHexToken* Token)
 void AHexBoard::MoveToken(AHexToken * Token, FHexCoordinate Coord)
 {	
 	if (Token && this->Tokens.Contains(Token)) {
+		UE_LOG(LogTemp, Warning, TEXT("Moving"));
+
 		FVector Vector= this->GetWorldLocationFromHexCoordinate(Coord);
 		// Set tokens's target move location
 		Token->SetTargetMoveLocation(Vector);
 		// Set token's UV location
 		Token->SetUV(Coord.U, Coord.V);
+		
 	}
 	else {
 		UE_LOG(LogTemp, Warning, TEXT("Token not valid"));
@@ -132,4 +136,9 @@ void AHexBoard::UpdateVisibleLocations()
 	{
 		this->DisplayTile(CoordToDisplay);
 	}
+}
+
+void AHexBoard::GetLifetimeReplicatedProps(TArray< FLifetimeProperty > & OutLifetimeProps) const
+{
+	DOREPLIFETIME(AHexBoard, Tokens);
 }

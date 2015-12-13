@@ -49,5 +49,9 @@ private:
 	// Target location for the movement
 	UPROPERTY(Replicated)
 	FVector TargetMoveLocation;
-	
+
+	UFUNCTION(reliable, server, WithValidation)
+	void ServerSetTargetMoveLocation(FVector NewTargetMoveLocation);
+	virtual void ServerSetTargetMoveLocation_Implementation(FVector NewTargetMoveLocation);
+	virtual bool ServerSetTargetMoveLocation_Validate(FVector NewTargetMoveLocation);
 };

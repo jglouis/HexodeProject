@@ -2,6 +2,7 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
+#include "HexCoordinate.h"
 #include "HexToken.generated.h"
 
 UCLASS()
@@ -17,30 +18,25 @@ public:
 	virtual void BeginPlay() override;
 
 	// Get the hexagonal coordinates
-	inline TArray<int32> GetUV() const { 
-		TArray<int32> HexCoord = TArray<int32>();
-		HexCoord.Add(U);
-		HexCoord.Add(V);
-		return HexCoord; }
+	UFUNCTION(BlueprintPure, Category = "Token")
+	FHexCoordinate GetHexCoordinate() const;
 
 	// Set Hexagonal coordinates
 	UFUNCTION(BlueprintCallable, Category = "Token")
 	void SetUV(int32 U, int32 V);
 
-	// Set target location
+	// Set Hexagonal coordinates
 	UFUNCTION(BlueprintCallable, Category = "Token")
-	void SetTargetMoveLocation(FVector NewTargetLocation);
+	void SetHexCoordinate(FHexCoordinate NewCoord);
 
-	// Get target location
-	UFUNCTION(BlueprintPure, Category = "Token")
-	FVector GetTargetMoveLocation() const;
+	inline int32 GetTileRadius() const { return TileRadius; };
 
+protected:
+	//Hex Coordinate
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Token")
+	FHexCoordinate Coord;
 
-private:
-	int32 U;
-	int32 V;
-
-	// target location for the movement
-	FVector TargetMoveLocation;
-	
+	// Visible tile radius around the token when placed on the board when on the board, must be >1
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Token")
+	int32 TileRadius = 3;
 };

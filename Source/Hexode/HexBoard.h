@@ -3,6 +3,7 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
+#include "HexCoordinate.h"
 #include "HexBoard.generated.h"
 
 UCLASS()
@@ -19,31 +20,19 @@ public:
 
 	// Get the World location from hexagonal coordinates
 	UFUNCTION(BlueprintPure, Category = "Board")
-	FVector GetWorldLocationFromHexagonalCoordinates(int32 U, int32 V) const;
+	FVector GetWorldLocationFromHexCoordinate(FHexCoordinate Coord) const;
 
-	// Get the U hexagonal coordinate from World location
+	// Get the hexagonal coordinate from World location
 	UFUNCTION(BlueprintPure, Category = "Board")
-	int32 GetUFromWorldLocation(FVector location) const;
+	FHexCoordinate GetHexCoordFromWorldLocation(FVector location) const;	
 
-	// Get the V hexagonal coordinate from World location
-	UFUNCTION(BlueprintPure, Category = "Board")
-	int32 GetVFromWorldLocation(FVector location) const;
-
-	// Get the distance between two hexagonal coordinates
-	UFUNCTION(BlueprintPure, Category = "Board")
-	int32 Distance(int32 U1, int32 V1, int32 U2, int32 V2) const;
-
-	// Display a tile at the given location
+	// Display a tile at the given hexagonal coordinate
 	UFUNCTION(BlueprintCallable, Category = "Board")
-	void DisplayTile(int32 U, int32 V);
+	void DisplayTile(FHexCoordinate Coord);
 
 	// Add a Token on the board and position it to the apropriate transform location
 	UFUNCTION(BlueprintCallable, Category = "Board")
 	void AddToken(class AHexToken* Token);
-
-	// Move a Token already on the board to the given hex coordinates
-	UFUNCTION(BlueprintCallable, Category = "Board")
-	void MoveToken(class AHexToken* Token, int32 U, int32 V);
 
 	// Get an array of all the Tokens on the board
 	UFUNCTION(BlueprintPure, Category = "Board")
@@ -59,12 +48,23 @@ protected:
 	uint8 TileSize;
 
 private:
-	// The Instanced static mesh that represents the hexagonal board
+	// The instanced static mesh that represents the hexagonal board
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Board", Meta = (AllowPrivateAccess = "true"))
 	class UInstancedStaticMeshComponent* BoardMesh;
+
+	// The static mesh representing the mesh when cursor is over
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Board", Meta = (AllowPrivateAccess = "true"))
+	class UStaticMeshComponent* CursorOverBoardMesh;
+
+	// The collision boc
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Board", Meta = (AllowPrivateAccess = "true"))
+	class UBoxComponent* CollisionBox;
 
 	// An array of all the tokens on the board
 	TArray<class AHexToken*> Tokens;
 
-	
+	// Update the board visible locations
+	UFUNCTION(BlueprintCallable, Category = "Board")
+	void UpdateVisibleLocations();
+
 };

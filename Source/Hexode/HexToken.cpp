@@ -2,7 +2,8 @@
 
 #include "Hexode.h"
 #include "HexToken.h"
-
+#include "HexCoordinate.h"
+#include "UnrealNetwork.h"
 
 // Sets default values
 AHexToken::AHexToken()
@@ -19,19 +20,18 @@ void AHexToken::BeginPlay()
 	
 }
 
+FHexCoordinate AHexToken::GetHexCoordinate() const
+{
+	return Coord;
+}
+
 void AHexToken::SetUV(int32 U, int32 V)
 {
-	this->U = U;
-	this->V = V;
+	this->Coord.U = U;
+	this->Coord.V = V;
 }
 
-void AHexToken::SetTargetMoveLocation(FVector NewTargetLocation)
+void AHexToken::SetHexCoordinate(FHexCoordinate NewCoord)
 {
-	this->TargetMoveLocation = NewTargetLocation;
+	this->Coord = NewCoord;
 }
-
-FVector AHexToken::GetTargetMoveLocation() const
-{
-	return this->TargetMoveLocation;
-}
-

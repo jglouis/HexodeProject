@@ -38,4 +38,12 @@ public:
 	/** Get the distance between two hexagonal coordinates */
 	UFUNCTION(BlueprintPure, Category = "HexUtil")
 	static int32 Distance(FHexCoordinate Coord1, FHexCoordinate Coord2);
+
+	/** Get the sum of two hexagonal coordinates */
+	UFUNCTION(BlueprintPure, Category = "HexUtil")
+	static FHexCoordinate Addition(FHexCoordinate Coord1, FHexCoordinate Coord2);
+
+	/** Get the difference of two hexagonal coordinates */
+	UFUNCTION(BlueprintPure, Category = "HexUtil")
+	static FHexCoordinate Substraction(FHexCoordinate Coord1, FHexCoordinate Coord2);
 };

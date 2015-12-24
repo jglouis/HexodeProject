@@ -26,3 +26,17 @@ int32 UHexUtil::Distance(FHexCoordinate Coord1, FHexCoordinate Coord2)
 		+ abs(U1 + V1 - U2 - V2)
 		+ abs(V1 - V2)) / 2;
 }
+
+FHexCoordinate UHexUtil::Addition(FHexCoordinate Coord1, FHexCoordinate Coord2)
+{
+	Coord1.U += Coord2.U;
+	Coord1.V += Coord2.V;
+	return Coord1;
+}
+
+FHexCoordinate UHexUtil::Substraction(FHexCoordinate Coord1, FHexCoordinate Coord2)
+{
+	Coord1.U -= Coord2.U;
+	Coord1.V -= Coord2.V;
+	return Coord1;
+}

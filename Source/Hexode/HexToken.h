@@ -52,9 +52,9 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Token")
 	int32 MaxSpeed;
 
-	// Maneuvrability (Limits the orientation of the new move location)
+	// Maneuverability (limits the deviation for the new movement vector)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Token")
-	int32 Maneuvrabililty;
+	int32 Maneuverabililty;
 
 	// Visible tile radius around the token when placed on the board when on the board, must be >1
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Token")

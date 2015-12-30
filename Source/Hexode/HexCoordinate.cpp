@@ -2,6 +2,7 @@
 
 #include "Hexode.h"
 #include "HexCoordinate.h"
+#include <math.h>
 
 FHexCoordinate::FHexCoordinate()
 {
@@ -34,6 +35,19 @@ int32 UHexUtil::Amplitude(FHexCoordinate Vector)
 	return (abs(U)
 		+ abs(U + V)
 		+ abs(V)) / 2;
+}
+
+float UHexUtil::Angle(FHexCoordinate Vector1, FHexCoordinate Vector2)
+{
+	float X1 = sqrt(3) * (Vector1.U + Vector1.V / 2.0);
+	float Y1 = 1.5 * Vector1.V;
+	float X2 = sqrt(3) * (Vector2.U + Vector2.V / 2.0);
+	float Y2 = 1.5 * Vector2.V;
+
+	float Dot = X1 * X2 + Y1 * Y2;
+	float Det = X1 * Y2 - Y1 * X2;
+
+	return atan2(Det, Dot);
 }
 
 FHexCoordinate UHexUtil::Addition(FHexCoordinate Coord1, FHexCoordinate Coord2)

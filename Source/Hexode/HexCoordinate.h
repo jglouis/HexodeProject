@@ -43,6 +43,10 @@ public:
 	UFUNCTION(BlueprintPure, Category = "HexUtil")
 	static int32 Amplitude(FHexCoordinate Vector);
 
+	/** Returns the angle between two hexagonal vectors*/
+	UFUNCTION(BlueprintPure, Category = "HexUtil")
+	static float Angle(FHexCoordinate Vector1, FHexCoordinate Vector2);
+
 	/** Get the sum of two hexagonal coordinates */
 	UFUNCTION(BlueprintPure, Category = "HexUtil")
 	static FHexCoordinate Addition(FHexCoordinate Coord1, FHexCoordinate Coord2);

@@ -3,7 +3,7 @@
 #include "Hexode.h"
 #include "HexToken.h"
 #include "HexCoordinate.h"
-#include "UnrealNetwork.h"
+#include <math.h>
 
 // Sets default values
 AHexToken::AHexToken()
@@ -49,7 +49,10 @@ TArray<FHexCoordinate> AHexToken::GetValidMovementVectors()
 			int32 Speed = UHexUtil::Amplitude(CurrentHexCoordinate);
 			int32 OldSpeed = UHexUtil::Amplitude(MovementVector);
 			int32 Acceleration = Speed - OldSpeed;
-			if (Speed <= MaxSpeed && Acceleration <= MaxAcceleration)
+
+			float Angle = UHexUtil::Angle(MovementVector, CurrentHexCoordinate);
+
+			if (Speed <= MaxSpeed && Acceleration <= MaxAcceleration && Angle <=  PI / 3.0 * Maneuvrabililty)
 			{
 				ValidVectors.Add(CurrentHexCoordinate);
 			}			

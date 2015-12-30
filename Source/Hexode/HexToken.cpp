@@ -41,16 +41,18 @@ TArray<FHexCoordinate> AHexToken::GetValidMovementVectors()
 	TArray<FHexCoordinate> ValidVectors = TArray<FHexCoordinate>();
 	
 	// Iterate over every coordinates limited by MaxSpeed
-	for (int32 u = Coord.U - MaxSpeed; u <= Coord.U + MaxSpeed; u++)
+	for (int32 u = -MaxSpeed; u <= MaxSpeed; u++)
 	{
-		for (int32 v = Coord.V - MaxSpeed; v <= Coord.V + MaxSpeed; v++)
+		for (int32 v = -MaxSpeed; v <= MaxSpeed; v++)
 		{
 			FHexCoordinate CurrentHexCoordinate(u, v);
-			int32 Distance = UHexUtil::Distance(CurrentHexCoordinate, Coord);
-			if (Distance <= MaxSpeed)
+			int32 Speed = UHexUtil::Amplitude(CurrentHexCoordinate);
+			int32 OldSpeed = UHexUtil::Amplitude(MovementVector);
+			int32 Acceleration = Speed - OldSpeed;
+			if (Speed <= MaxSpeed && Acceleration <= MaxAcceleration)
 			{
 				ValidVectors.Add(CurrentHexCoordinate);
-			}
+			}			
 		}
 	}
 

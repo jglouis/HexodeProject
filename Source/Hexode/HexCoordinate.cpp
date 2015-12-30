@@ -27,6 +27,15 @@ int32 UHexUtil::Distance(FHexCoordinate Coord1, FHexCoordinate Coord2)
 		+ abs(V1 - V2)) / 2;
 }
 
+int32 UHexUtil::Amplitude(FHexCoordinate Vector)
+{
+	int32 U = Vector.U;
+	int32 V = Vector.V;
+	return (abs(U)
+		+ abs(U + V)
+		+ abs(V)) / 2;
+}
+
 FHexCoordinate UHexUtil::Addition(FHexCoordinate Coord1, FHexCoordinate Coord2)
 {
 	Coord1.U += Coord2.U;

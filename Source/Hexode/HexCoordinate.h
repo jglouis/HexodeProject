@@ -39,6 +39,10 @@ public:
 	UFUNCTION(BlueprintPure, Category = "HexUtil")
 	static int32 Distance(FHexCoordinate Coord1, FHexCoordinate Coord2);
 
+	/** Get the amplitude of a hexagonal vector */
+	UFUNCTION(BlueprintPure, Category = "HexUtil")
+	static int32 Amplitude(FHexCoordinate Vector);
+
 	/** Get the sum of two hexagonal coordinates */
 	UFUNCTION(BlueprintPure, Category = "HexUtil")
 	static FHexCoordinate Addition(FHexCoordinate Coord1, FHexCoordinate Coord2);

@@ -49,10 +49,9 @@ TArray<FHexCoordinate> AHexToken::GetValidMovementVectors()
 			int32 Speed = UHexUtil::Amplitude(CurrentHexCoordinate);
 			int32 OldSpeed = UHexUtil::Amplitude(MovementVector);
 			int32 Acceleration = Speed - OldSpeed;
+			int32 Deviation = UHexUtil::Distance(CurrentHexCoordinate, MovementVector);
 
-			float Angle = UHexUtil::Angle(MovementVector, CurrentHexCoordinate);
-
-			if (Speed <= MaxSpeed && Acceleration <= MaxAcceleration && Angle <=  PI / 3.0 * Maneuvrabililty)
+			if (Speed <= MaxSpeed && Acceleration <= MaxAcceleration && Deviation <= Maneuvrabililty)
 			{
 				ValidVectors.Add(CurrentHexCoordinate);
 			}			

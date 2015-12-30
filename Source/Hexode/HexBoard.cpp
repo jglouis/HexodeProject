@@ -71,7 +71,7 @@ void AHexBoard::DisplayValidLocationTile(FHexCoordinate Coord)
 {
 	// Get the transform location
 	FVector Vector = this->GetWorldLocationFromHexCoordinate(Coord);
-	Vector.Z = 1; // Add an offset to be displayed over the other tiles
+	Vector.Z = 0.5; // Add an offset to be displayed over the other tiles
 	FTransform Transform = FTransform(Vector);
 	// Spawn the instance
 	ValidLocationsBoardMesh->AddInstance(Transform);

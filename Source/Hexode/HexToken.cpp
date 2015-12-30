@@ -35,3 +35,24 @@ void AHexToken::SetHexCoordinate(FHexCoordinate NewCoord)
 {
 	this->Coord = NewCoord;
 }
+
+TArray<FHexCoordinate> AHexToken::GetValidMovementVectors()
+{
+	TArray<FHexCoordinate> ValidVectors = TArray<FHexCoordinate>();
+	
+	// Iterate over every coordinates limited by MaxSpeed
+	for (int32 u = Coord.U - MaxSpeed; u <= Coord.U + MaxSpeed; u++)
+	{
+		for (int32 v = Coord.V - MaxSpeed; v <= Coord.V + MaxSpeed; v++)
+		{
+			FHexCoordinate CurrentHexCoordinate(u, v);
+			int32 Distance = UHexUtil::Distance(CurrentHexCoordinate, Coord);
+			if (Distance <= MaxSpeed)
+			{
+				ValidVectors.Add(CurrentHexCoordinate);
+			}
+		}
+	}
+
+	return ValidVectors;
+}

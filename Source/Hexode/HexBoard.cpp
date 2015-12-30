@@ -17,6 +17,10 @@ AHexBoard::AHexBoard()
 	BoardMesh = CreateAbstractDefaultSubobject<UInstancedStaticMeshComponent>(TEXT("BoardMesh"));
 	BoardMesh->AttachTo(RootComponent);
 
+	// Create the instanced static mesh for valid locations
+	ValidLocationsBoardMesh = CreateAbstractDefaultSubobject<UInstancedStaticMeshComponent>(TEXT("ValidLocationsBoardMesh"));
+	ValidLocationsBoardMesh->AttachTo(RootComponent);
+
 	// Define the root component as a collision box
 	CollisionBox = CreateAbstractDefaultSubobject<UBoxComponent>(TEXT("CollisionBox"));
 	CollisionBox->AttachTo(RootComponent);
@@ -61,6 +65,16 @@ void AHexBoard::DisplayTile(FHexCoordinate Coord)
 	FTransform Transform = FTransform(Vector);
 	// Spawn the instance
 	BoardMesh->AddInstance(Transform);
+}
+
+void AHexBoard::DisplayValidLocationTile(FHexCoordinate Coord)
+{
+	// Get the transform location
+	FVector Vector = this->GetWorldLocationFromHexCoordinate(Coord);
+	Vector.Z = 1; // Add an offset to be displayed over the other tiles
+	FTransform Transform = FTransform(Vector);
+	// Spawn the instance
+	ValidLocationsBoardMesh->AddInstance(Transform);
 }
 
 void AHexBoard::AddToken(AHexToken* Token)

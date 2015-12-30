@@ -31,12 +31,33 @@ public:
 
 	inline int32 GetTileRadius() const { return TileRadius; };
 
+	// Get a list of all the valid movementVectors
+	UFUNCTION(BlueprintPure, Category = "Token")
+	TArray<FHexCoordinate> GetValidMovementVectors();
+
 protected:
 	//Hex Coordinate
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Token")
 	FHexCoordinate Coord;
 
+	// Movement Vector
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Token")
+	FHexCoordinate MovementVector;
+
+	// Max Acceleration
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Token")
+	int32 MaxAcceleration;
+
+	// Max Speed (maximum length of the movement vector)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Token")
+	int32 MaxSpeed;
+
+	// Maneuvrability (Limits the orientation of the new move location)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Token")
+	int32 Maneuvrabililty;
+
 	// Visible tile radius around the token when placed on the board when on the board, must be >1
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Token")
 	int32 TileRadius = 3;
+
 };

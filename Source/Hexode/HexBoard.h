@@ -30,6 +30,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Board")
 	void DisplayTile(FHexCoordinate Coord);
 
+	// Display a valid location tile at the given hexagonal coordinate
+	UFUNCTION(BlueprintCallable, Category = "Board")
+	void DisplayValidLocationTile(FHexCoordinate Coord);
+
 	// Add a Token on the board and position it to the apropriate transform location
 	UFUNCTION(BlueprintCallable, Category = "Board")
 	void AddToken(class AHexToken* Token);
@@ -51,6 +55,10 @@ private:
 	// The instanced static mesh that represents the hexagonal board
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Board", Meta = (AllowPrivateAccess = "true"))
 	class UInstancedStaticMeshComponent* BoardMesh;
+
+	// The instanced static mesh that represents the valid movement locations on the hexagonal board
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Board", Meta = (AllowPrivateAccess = "true"))
+	class UInstancedStaticMeshComponent* ValidLocationsBoardMesh;
 
 	// The static mesh representing the mesh when cursor is over
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Board", Meta = (AllowPrivateAccess = "true"))

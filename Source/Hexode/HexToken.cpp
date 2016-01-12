@@ -4,13 +4,20 @@
 #include "HexToken.h"
 #include "HexCoordinate.h"
 #include <math.h>
+#include "UnrealNetwork.h"
 
 // Sets default values
 AHexToken::AHexToken()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	bReplicates = true;
+}
 
+void AHexToken::GetLifetimeReplicatedProps(TArray< FLifetimeProperty > & OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+	DOREPLIFETIME(AHexToken, Coord);
 }
 
 // Called when the game starts or when spawned

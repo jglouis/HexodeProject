@@ -37,7 +37,7 @@ public:
 
 protected:
 	//Hex Coordinate
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Token")
+	UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = "Token")
 	FHexCoordinate Coord;
 
 	// Movement Vector

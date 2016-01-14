@@ -81,6 +81,7 @@ void AHexBoard::AddToken(AHexToken* Token)
 {
 	// Adding the token to the array
 	this->Tokens.Add(Token);
+	Token->SetBoard(this);
 }
 
 TArray<class AHexToken*> AHexBoard::GetTokens() const

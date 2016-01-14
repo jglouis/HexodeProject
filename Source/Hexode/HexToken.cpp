@@ -67,3 +67,9 @@ TArray<FHexCoordinate> AHexToken::GetValidMovementVectors()
 
 	return ValidVectors;
 }
+
+void AHexToken::SetBoard(AHexBoard * Board)
+{
+	this->Board = Board;
+}
+

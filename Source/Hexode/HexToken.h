@@ -35,6 +35,8 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Token")
 	TArray<FHexCoordinate> GetValidMovementVectors();
 
+	void SetBoard(class AHexBoard* Board);
+
 protected:
 	//Hex Coordinate
 	UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = "Token")
@@ -59,5 +61,9 @@ protected:
 	// Visible tile radius around the token when placed on the board when on the board, must be >1
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Token")
 	int32 TileRadius = 3;
+
+	// Pointer to the board
+	UPROPERTY(BlueprintReadOnly, Category = "Token")
+	AHexBoard* Board;
 
 };

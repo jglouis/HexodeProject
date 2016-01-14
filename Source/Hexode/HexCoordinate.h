@@ -7,7 +7,7 @@
 #include "HexCoordinate.generated.h"
 
 /**
- * 
+ * Structure representing an hexagonal coordinate.
  */
 USTRUCT(BlueprintType)
 struct FHexCoordinate

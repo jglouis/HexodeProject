@@ -38,6 +38,9 @@ public:
 
 	void SetBoard(class AHexBoard* Board);
 
+	// Recompute the target move location according to hexagonal coordinates of the token
+	void UpdateTargetMoveLocation();
+
 protected:
 	//Hex Coordinate
 	UPROPERTY(ReplicatedUsing=OnCoord_Rep, EditAnywhere, BlueprintReadOnly, Category = "Token")
@@ -73,9 +76,6 @@ protected:
 
 private:
 	UFUNCTION()
-	void OnCoord_Rep();
-	
-	// Recompute the target move location according to hexagonal coordinates of the token
-	void UpdateTargetMoveLocation();
+	void OnCoord_Rep();	
 
 };

@@ -3,6 +3,7 @@
 
 #include "GameFramework/Actor.h"
 #include "HexCoordinate.h"
+#include "HexBoard.h"
 #include "HexToken.generated.h"
 
 UCLASS()
@@ -39,8 +40,12 @@ public:
 
 protected:
 	//Hex Coordinate
-	UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = "Token")
+	UPROPERTY(ReplicatedUsing=OnCoord_Rep, EditAnywhere, BlueprintReadWrite, Category = "Token")
 	FHexCoordinate Coord;
+
+	//Target move location
+	UPROPERTY(BlueprintReadOnly, Category = "Token")
+	FVector TargetMoveLocation;
 
 	// Movement Vector
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Token")
@@ -65,5 +70,12 @@ protected:
 	// Pointer to the board
 	UPROPERTY(BlueprintReadOnly, Category = "Token")
 	AHexBoard* Board;
+
+private:
+	UFUNCTION()
+	void OnCoord_Rep();
+	
+	// Recompute the target move location according to hexagonal coordinates of the token
+	void UpdateTargetMoveLocation();
 
 };

@@ -11,7 +11,8 @@ AHexToken::AHexToken()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	bReplicates = true;
+	bReplicates = true;;
+
 }
 
 void AHexToken::GetLifetimeReplicatedProps(TArray< FLifetimeProperty > & OutLifetimeProps) const
@@ -34,13 +35,19 @@ FHexCoordinate AHexToken::GetHexCoordinate() const
 
 void AHexToken::SetUV(int32 U, int32 V)
 {
-	this->Coord.U = U;
-	this->Coord.V = V;
+	Coord.U = U;
+	Coord.V = V;
 }
 
 void AHexToken::SetHexCoordinate(FHexCoordinate NewCoord)
 {
-	this->Coord = NewCoord;
+	Coord = NewCoord;
+
+	// Update target move location explicitly on the authority
+	if (Role == ROLE_Authority)
+	{
+		UpdateTargetMoveLocation();
+	}
 }
 
 TArray<FHexCoordinate> AHexToken::GetValidMovementVectors()
@@ -71,5 +78,17 @@ TArray<FHexCoordinate> AHexToken::GetValidMovementVectors()
 void AHexToken::SetBoard(AHexBoard * Board)
 {
 	this->Board = Board;
+}
+
+void AHexToken::OnCoord_Rep()
+{
+	UpdateTargetMoveLocation();
+}
+
+void AHexToken::UpdateTargetMoveLocation()
+{
+	if (Board) {
+		TargetMoveLocation = Board->GetWorldLocationFromHexCoordinate(Coord);
+	}
 }
 

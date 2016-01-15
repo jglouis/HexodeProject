@@ -40,7 +40,7 @@ public:
 
 protected:
 	//Hex Coordinate
-	UPROPERTY(ReplicatedUsing=OnCoord_Rep, EditAnywhere, BlueprintReadWrite, Category = "Token")
+	UPROPERTY(ReplicatedUsing=OnCoord_Rep, EditAnywhere, BlueprintReadOnly, Category = "Token")
 	FHexCoordinate Coord;
 
 	//Target move location

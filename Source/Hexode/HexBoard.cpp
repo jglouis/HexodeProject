@@ -85,11 +85,6 @@ void AHexBoard::AddToken(AHexToken* Token)
 	Token->UpdateTargetMoveLocation();
 }
 
-TArray<class AHexToken*> AHexBoard::GetTokens() const
-{
-	return TArray<class AHexToken*>();
-}
-
 void AHexBoard::UpdateVisibleLocations()
 {
 	// Clear all the instances

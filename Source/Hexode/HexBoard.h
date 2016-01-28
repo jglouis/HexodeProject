@@ -38,10 +38,6 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Board")
 	void AddToken(class AHexToken* Token);
 
-	// Get an array of all the Tokens on the board
-	UFUNCTION(BlueprintPure, Category = "Board")
-	TArray<class AHexToken*> GetTokens() const;
-
 protected:
 	// The Radius from center
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Board")
@@ -69,6 +65,7 @@ private:
 	class UBoxComponent* CollisionBox;
 
 	// An array of all the tokens on the board
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Board", Meta = (AllowPrivateAccess = "true"))
 	TArray<class AHexToken*> Tokens;
 
 	// Update the board visible locations

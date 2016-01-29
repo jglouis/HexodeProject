@@ -6,6 +6,8 @@
 #include <math.h>
 #include "UnrealNetwork.h"
 
+#define print(text) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red,text)
+
 // Sets default values
 AHexToken::AHexToken()
 {
@@ -89,6 +91,9 @@ void AHexToken::UpdateTargetMoveLocation()
 {
 	if (Board) {
 		TargetMoveLocation = Board->GetWorldLocationFromHexCoordinate(Coord);
+	}
+	else {
+		print("Board not assigned");
 	}
 }
 

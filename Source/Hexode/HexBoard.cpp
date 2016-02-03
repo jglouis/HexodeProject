@@ -5,6 +5,7 @@
 #include <math.h>
 #include "HexToken.h"
 #include "HexCoordinate.h"
+#include "UnrealNetwork.h"
 
 
 // Sets default values
@@ -27,9 +28,16 @@ AHexBoard::AHexBoard()
 
 	// Create the selection static mesh
 	CursorOverBoardMesh = CreateAbstractDefaultSubobject<UStaticMeshComponent>(TEXT("CursorOverBoardMesh"));
-	CursorOverBoardMesh->AttachTo(RootComponent);
-	
+	CursorOverBoardMesh->AttachTo(RootComponent);	
 
+	bReplicates = true;
+
+}
+
+void AHexBoard::GetLifetimeReplicatedProps(TArray< FLifetimeProperty > & OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+	DOREPLIFETIME(AHexBoard, Tokens);
 }
 
 // Called when the game starts or when spawned

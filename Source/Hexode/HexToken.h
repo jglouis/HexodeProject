@@ -71,7 +71,7 @@ protected:
 	int32 TileRadius = 3;
 
 	// Pointer to the board
-	UPROPERTY(BlueprintReadOnly, Category = "Token")
+	UPROPERTY(Replicated, BlueprintReadOnly, Category = "Token")
 	AHexBoard* Board;
 
 private:

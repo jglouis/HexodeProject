@@ -65,7 +65,7 @@ private:
 	class UBoxComponent* CollisionBox;
 
 	// An array of all the tokens on the board
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Board", Meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(Replicated, VisibleAnywhere, BlueprintReadOnly, Category = "Board", Meta = (AllowPrivateAccess = "true"))
 	TArray<class AHexToken*> Tokens;
 
 	// Update the board visible locations

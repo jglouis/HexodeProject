@@ -30,6 +30,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Board")
 	void DisplayTile(FHexCoordinate Coord);
 
+	// Display an arc of fire tile at the given hexagonal coordinate
+	UFUNCTION(BlueprintCallable, Category = "Board")
+	void DisplayArcOfFireTile(FHexCoordinate Coord);
+
 	// Display a valid location tile at the given hexagonal coordinate
 	UFUNCTION(BlueprintCallable, Category = "Board")
 	void DisplayValidLocationTile(FHexCoordinate Coord);
@@ -54,6 +58,10 @@ protected:
 	// The instanced static mesh that represents the valid movement locations on the hexagonal board
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Board")
 	class UInstancedStaticMeshComponent* ValidLocationsBoardMesh;
+
+	// The instanced static mesh that represents the board locations under an arc of fire
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Board")
+	class UInstancedStaticMeshComponent* ArcOfFireBoardMesh;
 
 	// The static mesh representing the mesh when cursor is over
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Board")

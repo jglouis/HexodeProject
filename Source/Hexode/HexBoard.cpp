@@ -22,6 +22,10 @@ AHexBoard::AHexBoard()
 	ValidLocationsBoardMesh = CreateAbstractDefaultSubobject<UInstancedStaticMeshComponent>(TEXT("ValidLocationsBoardMesh"));
 	ValidLocationsBoardMesh->AttachTo(RootComponent);
 
+	// Create the instanced static mesh for arc of fire locations
+	ArcOfFireBoardMesh = CreateAbstractDefaultSubobject<UInstancedStaticMeshComponent>(TEXT("ArcOfFireBoardMesh"));
+	ArcOfFireBoardMesh->AttachTo(RootComponent);
+
 	// Define the root component as a collision box
 	CollisionBox = CreateAbstractDefaultSubobject<UBoxComponent>(TEXT("CollisionBox"));
 	CollisionBox->AttachTo(RootComponent);
@@ -75,11 +79,19 @@ void AHexBoard::DisplayTile(FHexCoordinate Coord)
 	BoardMesh->AddInstance(Transform);
 }
 
+void AHexBoard::DisplayArcOfFireTile(FHexCoordinate Coord)
+{
+	// Get the transform location
+	FVector Vector = this->GetWorldLocationFromHexCoordinate(Coord);
+	FTransform Transform = FTransform(Vector);
+	// Spawn the instance
+	ArcOfFireBoardMesh->AddInstance(Transform);
+}
+
 void AHexBoard::DisplayValidLocationTile(FHexCoordinate Coord)
 {
 	// Get the transform location
 	FVector Vector = this->GetWorldLocationFromHexCoordinate(Coord);
-	Vector.Z = 0.5; // Add an offset to be displayed over the other tiles
 	FTransform Transform = FTransform(Vector);
 	// Spawn the instance
 	ValidLocationsBoardMesh->AddInstance(Transform);
@@ -97,9 +109,11 @@ void AHexBoard::UpdateVisibleLocations()
 {
 	// Clear all the instances
 	this->BoardMesh->ClearInstances();
+	this->ArcOfFireBoardMesh->ClearInstances();
 
 	// Set that will contain all the coordinates to display (no double)
-	TArray<FHexCoordinate> Coordinates = TArray<FHexCoordinate>();
+	TArray<FHexCoordinate> ValidLocationsCoordinates = TArray<FHexCoordinate>();
+	TArray<FHexCoordinate> ArcOfFireCoordinates = TArray<FHexCoordinate>();
 
 	for (AHexToken* Token : this->Tokens)
 	{
@@ -114,19 +128,32 @@ void AHexBoard::UpdateVisibleLocations()
 			for (int v = V - VisionRadius; v <= V + VisionRadius; v++)
 			{
 				FHexCoordinate coord(u, v);
-				if (UHexUtil::Distance(Token->GetHexCoordinate(), coord) <= VisionRadius)
+				// Arc of fire locations
+				if (UHexUtil::Distance(Token->GetHexCoordinate(), coord) <= 1)
 				{
 					// Add the coordinate uniquely so a tile is not displayed twice
-					Coordinates.AddUnique(coord);
+					ArcOfFireCoordinates.AddUnique(coord);
+				}
+				// Visible locations
+				else if (UHexUtil::Distance(Token->GetHexCoordinate(), coord) <= VisionRadius)
+				{
+					// Add the coordinate uniquely so a tile is not displayed twice
+					//ValidLocationsCoordinates.AddUnique(coord);
 				}				
 			}
 		}
 	}
 
 	// Display the tiles in the set
-	for (FHexCoordinate CoordToDisplay : Coordinates)
+	for (FHexCoordinate CoordToDisplay : ValidLocationsCoordinates)
 	{
 		this->DisplayTile(CoordToDisplay);
+	}
+
+	// Display the tiles in the arc of fire set
+	for (FHexCoordinate CoordToDisplay : ArcOfFireCoordinates)
+	{
+		this->DisplayArcOfFireTile(CoordToDisplay);
 	}
 }
 

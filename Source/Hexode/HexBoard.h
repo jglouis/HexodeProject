@@ -47,25 +47,24 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Board")
 	uint8 TileSize;
 
-private:
 	// The instanced static mesh that represents the hexagonal board
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Board", Meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Board")
 	class UInstancedStaticMeshComponent* BoardMesh;
 
 	// The instanced static mesh that represents the valid movement locations on the hexagonal board
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Board", Meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Board")
 	class UInstancedStaticMeshComponent* ValidLocationsBoardMesh;
 
 	// The static mesh representing the mesh when cursor is over
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Board", Meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Board")
 	class UStaticMeshComponent* CursorOverBoardMesh;
 
-	// The collision boc
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Board", Meta = (AllowPrivateAccess = "true"))
+	// The collision box
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Board")
 	class UBoxComponent* CollisionBox;
 
 	// An array of all the tokens on the board
-	UPROPERTY(Replicated, VisibleAnywhere, BlueprintReadOnly, Category = "Board", Meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(Replicated, VisibleAnywhere, BlueprintReadOnly, Category = "Board")
 	TArray<class AHexToken*> Tokens;
 
 	// Update the board visible locations

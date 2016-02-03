@@ -74,6 +74,10 @@ protected:
 	UPROPERTY(Replicated, BlueprintReadOnly, Category = "Token")
 	AHexBoard* Board;
 
+	// Owner's player ID
+	UPROPERTY(Replicated, BlueprintReadWrite, Category = "Token")
+	int32 OwnerId;
+
 private:
 	UFUNCTION()
 	void OnCoord_Rep();	

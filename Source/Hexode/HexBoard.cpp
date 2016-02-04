@@ -138,7 +138,7 @@ void AHexBoard::UpdateVisibleLocations()
 				else if (UHexUtil::Distance(Token->GetHexCoordinate(), coord) <= VisionRadius)
 				{
 					// Add the coordinate uniquely so a tile is not displayed twice
-					//ValidLocationsCoordinates.AddUnique(coord);
+					ValidLocationsCoordinates.AddUnique(coord);
 				}				
 			}
 		}
@@ -147,7 +147,9 @@ void AHexBoard::UpdateVisibleLocations()
 	// Display the tiles in the set
 	for (FHexCoordinate CoordToDisplay : ValidLocationsCoordinates)
 	{
-		this->DisplayTile(CoordToDisplay);
+		if (!ArcOfFireCoordinates.Contains(CoordToDisplay)) {
+			this->DisplayTile(CoordToDisplay);
+		}		
 	}
 
 	// Display the tiles in the arc of fire set

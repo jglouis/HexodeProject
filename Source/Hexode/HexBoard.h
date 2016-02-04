@@ -26,17 +26,9 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Board")
 	FHexCoordinate GetHexCoordFromWorldLocation(FVector location) const;	
 
-	// Display a tile at the given hexagonal coordinate
+	// Display a tile at the given hexagonal coordinate with the given mesh
 	UFUNCTION(BlueprintCallable, Category = "Board")
-	void DisplayTile(FHexCoordinate Coord);
-
-	// Display an arc of fire tile at the given hexagonal coordinate
-	UFUNCTION(BlueprintCallable, Category = "Board")
-	void DisplayArcOfFireTile(FHexCoordinate Coord);
-
-	// Display a valid location tile at the given hexagonal coordinate
-	UFUNCTION(BlueprintCallable, Category = "Board")
-	void DisplayValidLocationTile(FHexCoordinate Coord);
+	void DisplayTile(FHexCoordinate Coord, class UInstancedStaticMeshComponent* InstancedBoardMesh);
 
 	// Add a Token on the board and position it to the apropriate transform location
 	UFUNCTION(BlueprintCallable, Category = "Board")

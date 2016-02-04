@@ -70,31 +70,13 @@ FHexCoordinate AHexBoard::GetHexCoordFromWorldLocation(FVector location) const
 	return FHexCoordinate(U, V);
 }
 
-void AHexBoard::DisplayTile(FHexCoordinate Coord)
+void AHexBoard::DisplayTile(FHexCoordinate Coord, UInstancedStaticMeshComponent* InstancedBoardMesh)
 {
 	// Get the transform location
 	FVector Vector = this->GetWorldLocationFromHexCoordinate(Coord);
 	FTransform Transform = FTransform(Vector);
 	// Spawn the instance
-	BoardMesh->AddInstance(Transform);
-}
-
-void AHexBoard::DisplayArcOfFireTile(FHexCoordinate Coord)
-{
-	// Get the transform location
-	FVector Vector = this->GetWorldLocationFromHexCoordinate(Coord);
-	FTransform Transform = FTransform(Vector);
-	// Spawn the instance
-	ArcOfFireBoardMesh->AddInstance(Transform);
-}
-
-void AHexBoard::DisplayValidLocationTile(FHexCoordinate Coord)
-{
-	// Get the transform location
-	FVector Vector = this->GetWorldLocationFromHexCoordinate(Coord);
-	FTransform Transform = FTransform(Vector);
-	// Spawn the instance
-	ValidLocationsBoardMesh->AddInstance(Transform);
+	InstancedBoardMesh->AddInstance(Transform);
 }
 
 void AHexBoard::AddToken(AHexToken* Token)
@@ -148,14 +130,14 @@ void AHexBoard::UpdateVisibleLocations()
 	for (FHexCoordinate CoordToDisplay : ValidLocationsCoordinates)
 	{
 		if (!ArcOfFireCoordinates.Contains(CoordToDisplay)) {
-			this->DisplayTile(CoordToDisplay);
+			this->DisplayTile(CoordToDisplay, BoardMesh);
 		}		
 	}
 
 	// Display the tiles in the arc of fire set
 	for (FHexCoordinate CoordToDisplay : ArcOfFireCoordinates)
 	{
-		this->DisplayArcOfFireTile(CoordToDisplay);
+		this->DisplayTile(CoordToDisplay, ArcOfFireBoardMesh);
 	}
 }
 

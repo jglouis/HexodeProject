@@ -38,6 +38,8 @@ public:
 
 	void SetBoard(class AHexBoard* Board);
 
+	inline int32 GetOwnerId() const { return OwnerId; };
+
 	// Recompute the target move location according to hexagonal coordinates of the token
 	void UpdateTargetMoveLocation();
 

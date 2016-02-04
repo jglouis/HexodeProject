@@ -34,7 +34,7 @@ AHexBoard::AHexBoard()
 	CursorOverBoardMesh = CreateAbstractDefaultSubobject<UStaticMeshComponent>(TEXT("CursorOverBoardMesh"));
 	CursorOverBoardMesh->AttachTo(RootComponent);	
 
-	bReplicates = true;
+	bReplicates = true;	
 
 }
 
@@ -103,15 +103,23 @@ void AHexBoard::UpdateVisibleLocations()
 		int32 U = Token->GetHexCoordinate().U;
 		int32 V = Token->GetHexCoordinate().V;
 
+		// Check if it an owned token
+		UWorld* World = GetWorld();
+		bool isTokenOwned = false;
+		if (World) {
+			isTokenOwned = World->GetFirstPlayerController()->PlayerState->PlayerId == Token->GetOwnerId();
+		}
+
 		// Iterate over all the tiles around the token locations
 		const int VisionRadius = Token->GetTileRadius();
 		for (int u = U - VisionRadius; u <= U + VisionRadius; u++)
 		{
 			for (int v = V - VisionRadius; v <= V + VisionRadius; v++)
 			{
-				FHexCoordinate coord(u, v);
+				FHexCoordinate coord(u, v);						
+
 				// Arc of fire locations
-				if (UHexUtil::Distance(Token->GetHexCoordinate(), coord) <= 1)
+				if (UHexUtil::Distance(Token->GetHexCoordinate(), coord) <= 1 && isTokenOwned)
 				{
 					// Add the coordinate uniquely so a tile is not displayed twice
 					ArcOfFireCoordinates.AddUnique(coord);
@@ -120,8 +128,8 @@ void AHexBoard::UpdateVisibleLocations()
 				else if (UHexUtil::Distance(Token->GetHexCoordinate(), coord) <= VisionRadius)
 				{
 					// Add the coordinate uniquely so a tile is not displayed twice
-					VisibleLocationsCoordinates.AddUnique(coord);
-				}				
+					VisibleLocationsCoordinates.AddUnique(coord);					
+				}
 			}
 		}
 	}

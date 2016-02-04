@@ -94,7 +94,7 @@ void AHexBoard::UpdateVisibleLocations()
 	this->ArcOfFireBoardMesh->ClearInstances();
 
 	// Set that will contain all the coordinates to display (no double)
-	TArray<FHexCoordinate> ValidLocationsCoordinates = TArray<FHexCoordinate>();
+	TArray<FHexCoordinate> VisibleLocationsCoordinates = TArray<FHexCoordinate>();
 	TArray<FHexCoordinate> ArcOfFireCoordinates = TArray<FHexCoordinate>();
 
 	for (AHexToken* Token : this->Tokens)
@@ -120,14 +120,14 @@ void AHexBoard::UpdateVisibleLocations()
 				else if (UHexUtil::Distance(Token->GetHexCoordinate(), coord) <= VisionRadius)
 				{
 					// Add the coordinate uniquely so a tile is not displayed twice
-					ValidLocationsCoordinates.AddUnique(coord);
+					VisibleLocationsCoordinates.AddUnique(coord);
 				}				
 			}
 		}
 	}
 
 	// Display the tiles in the set
-	for (FHexCoordinate CoordToDisplay : ValidLocationsCoordinates)
+	for (FHexCoordinate CoordToDisplay : VisibleLocationsCoordinates)
 	{
 		if (!ArcOfFireCoordinates.Contains(CoordToDisplay)) {
 			this->DisplayTile(CoordToDisplay, BoardMesh);

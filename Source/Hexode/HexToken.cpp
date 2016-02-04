@@ -22,6 +22,7 @@ void AHexToken::GetLifetimeReplicatedProps(TArray< FLifetimeProperty > & OutLife
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 	DOREPLIFETIME(AHexToken, Coord);
 	DOREPLIFETIME(AHexToken, Board);
+	DOREPLIFETIME(AHexToken, Weapons);
 	DOREPLIFETIME(AHexToken, OwnerId);
 }
 

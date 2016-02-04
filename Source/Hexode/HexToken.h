@@ -4,6 +4,7 @@
 #include "GameFramework/Actor.h"
 #include "HexCoordinate.h"
 #include "HexBoard.h"
+#include "Weapon.h"
 #include "HexToken.generated.h"
 
 UCLASS()
@@ -35,6 +36,8 @@ public:
 	// Get a list of all the valid movementVectors
 	UFUNCTION(BlueprintPure, Category = "Token")
 	TArray<FHexCoordinate> GetValidMovementVectors();
+
+	inline TArray<FWeapon> GetWeapons() const { return Weapons; };
 
 	void SetBoard(class AHexBoard* Board);
 
@@ -71,6 +74,10 @@ protected:
 	// Visible tile radius around the token when placed on the board when on the board, must be >1
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Token")
 	int32 TileRadius = 3;
+
+	// Weapons
+	UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = "Token")
+	TArray<FWeapon> Weapons;
 
 	// Pointer to the board
 	UPROPERTY(Replicated, BlueprintReadOnly, Category = "Token")

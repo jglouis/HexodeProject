@@ -97,7 +97,7 @@ void AHexBoard::UpdateVisibleLocations()
 	TArray<FHexCoordinate> VisibleLocationsCoordinates = TArray<FHexCoordinate>();
 	TArray<FHexCoordinate> ArcOfFireCoordinates = TArray<FHexCoordinate>();
 
-	for (AHexToken* Token : this->Tokens)
+	for (AHexToken* Token : Tokens)
 	{
 		// Get token coordinates
 		int32 U = Token->GetHexCoordinate().U;
@@ -110,22 +110,23 @@ void AHexBoard::UpdateVisibleLocations()
 			isTokenOwned = World->GetFirstPlayerController()->PlayerState->PlayerId == Token->GetOwnerId();
 		}
 
+		// arc of fire
+		for (FWeapon Weapon : Token->GetWeapons()) {
+			for (FHexCoordinate WeaponCoordinate : Weapon.Coordinates) {
+				FHexCoordinate Coord = UHexUtil::Addition(Token->GetHexCoordinate(), WeaponCoordinate);
+				ArcOfFireCoordinates.AddUnique(Coord);
+			}			
+		}
+
 		// Iterate over all the tiles around the token locations
 		const int VisionRadius = Token->GetTileRadius();
 		for (int u = U - VisionRadius; u <= U + VisionRadius; u++)
 		{
 			for (int v = V - VisionRadius; v <= V + VisionRadius; v++)
 			{
-				FHexCoordinate coord(u, v);						
-
-				// Arc of fire locations
-				if (UHexUtil::Distance(Token->GetHexCoordinate(), coord) <= 1 && isTokenOwned)
-				{
-					// Add the coordinate uniquely so a tile is not displayed twice
-					ArcOfFireCoordinates.AddUnique(coord);
-				}
+				FHexCoordinate coord(u, v);
 				// Visible locations
-				else if (UHexUtil::Distance(Token->GetHexCoordinate(), coord) <= VisionRadius)
+				if (UHexUtil::Distance(Token->GetHexCoordinate(), coord) <= VisionRadius)
 				{
 					// Add the coordinate uniquely so a tile is not displayed twice
 					VisibleLocationsCoordinates.AddUnique(coord);					

@@ -56,6 +56,16 @@ void AHexToken::SetHexCoordinate(FHexCoordinate NewCoord)
 	}
 }
 
+EOrientationEnum AHexToken::GetOrientation() const
+{
+	return Orientation;
+}
+
+void AHexToken::SetOrientation(EOrientationEnum NewOrientation)
+{
+	Orientation = NewOrientation;
+}
+
 TArray<FHexCoordinate> AHexToken::GetValidMovementVectors()
 {
 	TArray<FHexCoordinate> ValidVectors = TArray<FHexCoordinate>();

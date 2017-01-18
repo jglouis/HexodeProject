@@ -31,6 +31,14 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Token")
 	void SetHexCoordinate(FHexCoordinate NewCoord);
 
+	// Get Orientation
+	UFUNCTION(BlueprintPure, Category = "Token")
+	EOrientationEnum GetOrientation() const;
+
+	// Set Orientation
+	UFUNCTION(BlueprintCallable, Category = "Token")
+	void SetOrientation(EOrientationEnum NewOrientation);
+
 	inline int32 GetTileRadius() const { return TileRadius; };
 
 	// Get a list of all the valid movementVectors

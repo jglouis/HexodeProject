@@ -80,9 +80,9 @@ TArray<FHexCoordinate> AHexToken::GetValidMovementVectors()
 	return ValidVectors;
 }
 
-void AHexToken::SetBoard(AHexBoard * Board)
+void AHexToken::SetBoard(AHexBoard * NewBoard)
 {
-	this->Board = Board;
+	this->Board = NewBoard;
 }
 
 void AHexToken::OnCoord_Rep()

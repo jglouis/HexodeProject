@@ -16,23 +16,23 @@ AHexBoard::AHexBoard()
 
 	// Create the instanced static mesh
 	BoardMesh = CreateAbstractDefaultSubobject<UInstancedStaticMeshComponent>(TEXT("BoardMesh"));
-	BoardMesh->AttachTo(RootComponent);
+	BoardMesh->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepWorldTransform);
 
 	// Create the instanced static mesh for valid locations
 	ValidLocationsBoardMesh = CreateAbstractDefaultSubobject<UInstancedStaticMeshComponent>(TEXT("ValidLocationsBoardMesh"));
-	ValidLocationsBoardMesh->AttachTo(RootComponent);
+	ValidLocationsBoardMesh->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepWorldTransform);
 
 	// Create the instanced static mesh for arc of fire locations
 	ArcOfFireBoardMesh = CreateAbstractDefaultSubobject<UInstancedStaticMeshComponent>(TEXT("ArcOfFireBoardMesh"));
-	ArcOfFireBoardMesh->AttachTo(RootComponent);
+	ArcOfFireBoardMesh->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepWorldTransform);
 
 	// Define the root component as a collision box
 	CollisionBox = CreateAbstractDefaultSubobject<UBoxComponent>(TEXT("CollisionBox"));
-	CollisionBox->AttachTo(RootComponent);
+	CollisionBox->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepWorldTransform);
 
 	// Create the selection static mesh
 	CursorOverBoardMesh = CreateAbstractDefaultSubobject<UStaticMeshComponent>(TEXT("CursorOverBoardMesh"));
-	CursorOverBoardMesh->AttachTo(RootComponent);	
+	CursorOverBoardMesh->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepWorldTransform);
 
 	bReplicates = true;	
 

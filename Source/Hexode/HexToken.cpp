@@ -3,6 +3,7 @@
 #include "Hexode.h"
 #include "HexToken.h"
 #include "HexCoordinate.h"
+#include "HexBoard.h"
 #include <math.h>
 #include "UnrealNetwork.h"
 

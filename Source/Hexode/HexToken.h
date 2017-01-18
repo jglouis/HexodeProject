@@ -3,7 +3,7 @@
 
 #include "GameFramework/Actor.h"
 #include "HexCoordinate.h"
-#include "HexBoard.h"
+#include "OrientationEnum.h"
 #include "Weapon.h"
 #include "HexToken.generated.h"
 
@@ -47,9 +47,13 @@ public:
 	void UpdateTargetMoveLocation();
 
 protected:
-	//Hex Coordinate
+	//Current Hex Coordinate
 	UPROPERTY(ReplicatedUsing=OnCoord_Rep, EditAnywhere, BlueprintReadOnly, Category = "Token")
 	FHexCoordinate Coord;
+
+	//Current orientation
+	UPROPERTY(Replicated, EditAnywhere, BlueprintReadOnly, Category = "Token")
+	EOrientationEnum Orientation;
 
 	//Target move location
 	UPROPERTY(BlueprintReadOnly, Category = "Token")
